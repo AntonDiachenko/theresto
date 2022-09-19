@@ -25,3 +25,13 @@
 3. Need assistance / figure things out
 - find and test a way for the connection to azure.
 - could have try move data to azure database.
+
+
+2022/09/19 Alex
+1. Done / not done since last scrum:
+- Researched React generally and Github for project purposes. 
+2. To do until next Scrum:
+- Initialize Trello board
+- Initialize Github
+- continue react research
+3. Need assistance / figure things out
