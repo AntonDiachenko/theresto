@@ -18,3 +18,18 @@ Example entries for one day, both team members:
 3. Need assistance / figure things out
 - find and test a library for PDF printouts
 - find out how to fetch data from URL and parse JSON
+
+
+2018/02/28 Xin Shi
+1. Done / not done since last scrum:
+- created server files(user models and routes) 
+- created login and regitration pages for user(admin and user)
+- did not connect the azure blob services to store the image
+2. To do until next Scrum:
+- finish the connection to azure blob
+- finish the user manage page
+- create the custom dialog for user login
+- setup the database
+3. Need assistance / figure things out
+- find and test a way for the connection to azure
+- could have try move data to azure database.
