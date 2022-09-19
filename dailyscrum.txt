@@ -35,3 +35,4 @@
 - Initialize Github
 - continue react research
 3. Need assistance / figure things out
+4. eat lunch soon
