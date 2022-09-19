@@ -31,5 +31,5 @@ Example entries for one day, both team members:
 - create the custom dialog for user login
 - setup the database
 3. Need assistance / figure things out
-- find and test a way for the connection to azure
+- find and test a way for the connection to azure.
 - could have try move data to azure database.
