@@ -2,7 +2,6 @@ import React from 'react';
 import  { useState, useContext } from "react";
 import { AuthContext } from "../helper/AuthContext"
 import axios from "axios";
-import '../bootstrap-5.2.1/dist/css/bootstrap.css';
 import { useNavigate } from "react-router-dom"; 
 
 function Registration() {

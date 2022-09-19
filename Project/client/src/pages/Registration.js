@@ -2,7 +2,6 @@ import React from 'react';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import axios from "axios";
-import '../bootstrap-5.2.1/dist/css/bootstrap.css';
 import { useNavigate } from "react-router-dom"; 
 // const { Users } = require("../models");
 
