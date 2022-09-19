@@ -4,6 +4,9 @@
 3. Where do I need assistance? What do I need to figure out?
 
 2022/09/19 Anton
+Example entries for one day, both team members:
+
+2018/02/28 Alexander
 1. Done / not done since last scrum:
 - finalized project proposal
 2. To do until next Scrum:
@@ -11,4 +14,9 @@
 - define user stories for the trello board
 - setup the database
 3. Need assistance / figure things out
+<<<<<<< HEAD
 - 
+=======
+- find and test a library for PDF printouts
+- find out how to fetch data from URL and parse JSON
+>>>>>>> dfd0f88b43ff46da589c7e40eae25632398cee7e
