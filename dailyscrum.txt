@@ -44,4 +44,16 @@
 2. To do until next Scrum:
 - navbar and footer css 
 3. Need assistance / figure things out
-- clarify on routes for the menu
+- clarify on routes for the menu.
+
+
+2022/09/20 XinShi
+1. Done / not done since last scrum:
+- completed usermanage page (crud)
+- modified the regitration page 
+2. To do until next Scrum:
+- will finish the userupdate 
+- profile page 
+- itemmanage page
+3. Need assistance / figure things out
+- the userupdate page has some issues

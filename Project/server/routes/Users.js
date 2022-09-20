@@ -53,10 +53,10 @@ router.post("/", async (req, res) => {
 
 
   
-  router.get('/byId/:id', validateToken, async (req,res)=>{
+  router.get('/byId/:id',  async (req,res)=>{
     const id = req.params.id;
-    const auc = await Users.findByPk(id);
-    res.json(auc);
+    const user = await Users.findByPk(id);
+    res.json(user);
 
   })
 
