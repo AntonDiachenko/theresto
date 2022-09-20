@@ -4,40 +4,41 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// const { Users } = require("../models");
+function Addnewuser() {
+    const initialValues = {
+        username:"",
+        email:"",
+        password:"",
+        confirmpassword:"",
+        phone:"",
+        role:"user"
+    };
 
-function Registration() {
-  const initialValues = {
-    username:"",
-    email:"",
-    password:"",
-    confirmpassword:"",
-    phone:"",
+    const navigate = useNavigate();
+    const onSubmit = (data) => {
+      axios.post("http://localhost:3001/auth", data
+      
+      ).then((response) => {
+        navigate("/usermanage");
+      });
+    };
   
-};
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    axios.post("http://localhost:3001/auth", data
+
+    const validationSchema= Yup.object().shape({
+        username:Yup.string().min(3).max(15).required(), 
+        email:Yup.string().email().required(), 
+        password:Yup.string().min(4).max(20).required(), 
+        confirmpassword:Yup.string()
+        .required()
+        .oneOf([Yup.ref('password')], 'Your passwords do not match.'),
+        phone:Yup.string().required(), 
+        role:Yup.string().oneOf(['admin','user'])
+    }); 
     
-    ).then((response) => {
-      navigate("/login");
-    });
-  };
-
-  const validationSchema= Yup.object().shape({
-    username:Yup.string().min(3).max(15).required(), 
-    email:Yup.string().email().required(), 
-    password:Yup.string().min(4).max(20).required(), 
-    confirmpassword:Yup.string()
-    .required()
-    .oneOf([Yup.ref('password')], 'Your passwords do not match.'),
-    phone:Yup.string().required(), 
-
-}); 
 
   return (
     <div>
-      <div className="createUserPage">
+      <div className="createAuctionPage">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
@@ -86,12 +87,20 @@ function Registration() {
               placeholder="Your phone"
             />
 
-            <button type="submit">Register</button>
+            <label>Role:</label>
+            <ErrorMessage name="role" component="span" />
+            <Field
+              id="inputCreateUser"
+              name="role"
+              placeholder="Your role"
+            />
+
+            <button type="submit">Add a new User</button>
           </Form>
         </Formik>
       </div>
     </div>
-  );
+  )
 }
 
-export default Registration;
+export default Addnewuser

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link, Navigate} from 'react-router-dom';
 import Home from "./pages/Home";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -14,9 +14,11 @@ import Historymanage from "./pages/Historymanage";
 import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart";
+import Userupdate from "./pages/Userupdate";
+import Addnewuser from './pages/Addnewuser';
 
 function App() {
-
+  // const navigate = useNavigate();
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
@@ -29,6 +31,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false ,role: "",});
+
   };
 
   const [user, setUser] = useState({});
@@ -141,6 +144,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/fav" element={<Favorite />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/update" element={<Userupdate />} />
+            <Route path="/newuser" element={<Addnewuser />} />
           </Routes>
         </Router>
         </AuthContext.Provider>

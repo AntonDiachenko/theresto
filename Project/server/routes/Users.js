@@ -46,8 +46,49 @@ router.post("/", async (req, res) => {
     });
   }); 
 
-  router.get("/auth", validateToken, (req, res) => {
-    res.json(req.user);
+  router.get("/auth", async (req, res) => {
+    const users = await Users.findAll();
+    res.json(users);
+  });
+
+
+  
+  router.get('/byId/:id', validateToken, async (req,res)=>{
+    const id = req.params.id;
+    const auc = await Users.findByPk(id);
+    res.json(auc);
+
+  })
+
+
+  
+
+router.delete("/delete/:id", validateToken, async(req,res)=>{
+  const userid = req.params.id;
+  await Users.destroy({
+    where:{
+      id: userid
+    }
+  });
+  res.json("delete")
+});
+
+
+router.put("/update/:id", validateToken, async(req,res)=>{
+  const userid = req.params.id;
+  const user = req.body;
+  await Users.update({ 
+    username:user.username,
+    email :user.email,
+
+    phone:user.phone,
+    role: user.role
+     }, { where: { id: userid } });
+  res.json(req.body);
+  
   });
   
+
+
+
 module.exports = router;
