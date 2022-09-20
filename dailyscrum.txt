@@ -36,3 +36,12 @@
 - continue react research
 3. Need assistance / figure things out
 4. eat lunch soon
+
+2022/09/20 Anton
+1. Done / not done since last scrum:
+- completed setting up GitHub repository for the project
+- menu page with menu file in routes folder
+2. To do until next Scrum:
+- navbar and footer css 
+3. Need assistance / figure things out
+- clarify on routes for the menu
