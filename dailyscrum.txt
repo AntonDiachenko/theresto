@@ -44,6 +44,7 @@
 2. To do until next Scrum:
 - navbar and footer css 
 3. Need assistance / figure things out
+
 - clarify on routes for the menu.
 
 
@@ -57,3 +58,14 @@
 - itemmanage page
 3. Need assistance / figure things out
 - the userupdate page has some issues
+
+
+2022/09/20 Alex
+1. Done / not done since last scrum:
+- Built all tables in Model folder and set associations (commented out)
+2. To do until next Scrum:
+- Set up routes for Models
+- Test routes in postman
+- initialize associations in tables
+3. Need assistance / figure things out
+- May need further research in implementing sequelize associations
