@@ -47,7 +47,11 @@ function Registration() {
             <label>User Name:</label>
             <ErrorMessage name="username" component="span" />
             <Field 
+
             id="inputCreateUser" 
+
+
+
             name="username" 
             placeholder="John" 
             />
@@ -55,7 +59,10 @@ function Registration() {
             <label>Email:</label>
             <ErrorMessage name="email" component="span" />
             <Field
+
               id="inputCreateUser"
+
+
               name="email"
               placeholder="Your email"
             />
@@ -72,8 +79,12 @@ function Registration() {
             <label>Confirm Password:</label>
             <ErrorMessage name="confirmpassword" component="span" />
             <Field
+
               id="inputCreateUser"
               type="password"
+
+   
+
               name="confirmpassword"
               placeholder="Retype password"
             />
@@ -81,7 +92,10 @@ function Registration() {
             <label>Phone:</label>
             <ErrorMessage name="phone" component="span" />
             <Field
+
               id="inputCreateUser"
+
+
               name="phone"
               placeholder="Your phone"
             />
