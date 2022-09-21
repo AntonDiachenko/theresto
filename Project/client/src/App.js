@@ -118,7 +118,7 @@ function App() {
                   href="#!"
                   role="button"
                 >
-                  <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg"></img>
+           
                   facebook
                 </a>
                 {/* add the icon of facebook */}
@@ -130,7 +130,7 @@ function App() {
                 >
                   <i class="fab fa-twitter"></i>twitter
                 </a>
-
+                <Link className='' to="/login"> Login</Link>
                 <a
                   class="btn text-red btn-floating m-1"
                   href="#!"

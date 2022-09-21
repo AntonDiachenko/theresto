@@ -4,11 +4,17 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
 }
 
 body {
   margin: 0;
   padding: 0;
+  background: url('https://projectgofishing.blob.core.windows.net/gofishing/homepage.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-24T03%3A54%3A54Z&sp=rwl&sig=8uvg2rXBHWUwBi%2BqZ3w7%2FR0J7YkWylTEnKXWOJc0V6k%3D') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
 
 .post {

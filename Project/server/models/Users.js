@@ -1,4 +1,7 @@
+// const mongoose = require('mongoose');
+
 module.exports = (sequelize, Datatypes) => {
+
   const Users = sequelize.define("Users", {
     username: {
       type: Datatypes.STRING(255),
