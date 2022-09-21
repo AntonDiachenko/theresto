@@ -74,7 +74,7 @@ router.delete("/delete/:id", validateToken, async(req,res)=>{
 });
 
 
-router.put("/update/:id", validateToken, async(req,res)=>{
+router.put("/update/:id", validateToken,  async(req,res)=>{
   const userid = req.params.id;
   const user = req.body;
   await Users.update({ 

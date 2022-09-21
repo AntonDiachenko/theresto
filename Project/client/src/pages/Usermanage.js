@@ -72,8 +72,8 @@ const deleteUser = (id)=>{
                                     <td className="col-2">{value.phone}</td>
                                     <td className="col-1">{value.role}</td>
                                     <td className="col-3"> <button className='btn   btn-outline-danger  col-6' onClick={()=>{deleteUser(value.id)}}>Delete</button>
-                                   <button className='btn btn-outline-danger  col-6' 
-                                    onClick={()=>{navigate('/update')}}>Edit</button></td>
+                                    <button className='btn btn-outline-danger  col-6' 
+                                    onClick={()=>{navigate(`/update/${value.id}`)}}>Edit</button></td>
                                     
                                     </tr>
                             );
