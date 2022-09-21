@@ -1,5 +1,11 @@
-import './App.css';
-import {BrowserRouter as Router, Route, Routes, Link, Navigate} from 'react-router-dom';
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  Navigate,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import { useEffect, useState } from "react";
@@ -16,7 +22,7 @@ import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
-import Addnewuser from './pages/Addnewuser';
+import Addnewuser from "./pages/Addnewuser";
 
 function App() {
   // const navigate = useNavigate();
@@ -153,7 +159,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/fav" element={<Favorite />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/update" element={<Userupdate />} />
+            <Route path="/update/:id" element={<Userupdate />} />
             <Route path="/newuser" element={<Addnewuser />} />
           </Routes>
         </Router>
