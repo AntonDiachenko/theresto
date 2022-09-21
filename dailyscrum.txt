@@ -91,3 +91,14 @@
 - test and implement table associations between categories and menuitems
 3. Need assistance / figure things out
 - May need further research in implementing sequelize associations with categories and menus
+
+
+2022/09/21 XinShi
+1. Done / not done since last scrum:
+- completed the updateuser
+- not finish the profile and the itemmanage page (crud)
+2. To do until next Scrum:
+- profile page 
+- itemmanage page
+3. Need assistance / figure things out
+- have a research in uploading files to cloud 
