@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
-// register a new user
+// post a new user
 router.post("/", async (req, res) => {
   const user = ({ username, email, password, phone } = req.body);
 
