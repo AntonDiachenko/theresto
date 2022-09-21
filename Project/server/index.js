@@ -8,16 +8,18 @@ app.use(cors());
 const db = require("./models");
 
 // Routers
+//Users
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
-
-const menuRouter = require("./routes/Menu");
+//Menuitems
+const menuRouter = require("./routes/Menuitems");
 app.use("/menu", menuRouter);
+//Categories
+const categoriesRouter = require("./routes/Categories");
+app.use("/categories", categoriesRouter);
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {
     console.log("Server running on port 3001");
   });
 });
-
-

@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import './App.css';
+import "./App.css";
 import reportWebVitals from "./reportWebVitals";
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
+// React-Bootsrap
+import Accordion from "react-bootstrap/Accordion";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
