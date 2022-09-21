@@ -30,9 +30,6 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-
-router.put("/update/:id", validateToken,  async(req,res)=>{
-
   const user = await Users.findOne({ where: { username: username } });
 
   if (!user) res.json({ error: "User Doesn't Exist" });
@@ -88,7 +85,6 @@ router.delete("/delete/:id", validateToken, async (req, res) => {
 
 // UPDATE --> EDIT
 router.put("/update/:id([0-9]+)", async (req, res) => {
-
   const userid = req.params.id;
   const user = req.body;
   await Users.update(

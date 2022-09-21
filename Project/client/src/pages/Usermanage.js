@@ -41,45 +41,6 @@ function Usermanage() {
 
   return (
     <div class="auction1  container col-6 left mb-5">
-
-            <div >
-            <div className='row'>
-            <h2 className='col'>User List:</h2> 
-            <button className='btn btn-sm  btn-outline-danger  col-2' 
-                                    onClick={()=>{navigate('/newuser')}}>Add a new User</button>
-            </div>    
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                        <th className="col-1">UserId</th>
-                        <th className="col-1">UserName</th>
-                        <th className="col-2">Email</th>
-                        <th className="col-2">Phone</th>
-                        <th className="col-1">Role</th>
-                        
-                        </tr>
-                
-                        {listOfUsers.map((value, key)=>{
-                            return  (
-                                    <tr>
-                                    <td className="col-1">{value.id}</td>
-                                    <td className="col-1">{value.username}</td>
-                                    <td className="col-2">{value.email}</td>
-                                    <td className="col-2">{value.phone}</td>
-                                    <td className="col-1">{value.role}</td>
-                                    <td className="col-3"> <button className='btn   btn-outline-danger  col-6' onClick={()=>{deleteUser(value.id)}}>Delete</button>
-                                    <button className='btn btn-outline-danger  col-6' 
-                                    onClick={()=>{navigate(`/update/${value.id}`)}}>Edit</button></td>
-                                    
-                                    </tr>
-                            );
-                            
-                        })}
-                    </thead>
-                </table>
-            </div>
-            
-
       <div>
         <div className="row">
           <h2 className="col">User List:</h2>
@@ -91,7 +52,6 @@ function Usermanage() {
           >
             Add a new User
           </button>
-
         </div>
         <table class="table table-striped">
           <thead>
