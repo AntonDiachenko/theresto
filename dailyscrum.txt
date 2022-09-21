@@ -69,3 +69,14 @@
 - initialize associations in tables
 3. Need assistance / figure things out
 - May need further research in implementing sequelize associations
+
+2022/09/20 Alex
+1. Done / not done since last scrum:
+- completed menu and comments routes
+- partially fixed issue on usermanage page with admin editing user profiles
+- researched layouts for menu page with categories
+2. To do until next Scrum:
+- build menu page with categories in accordian style and menuitems in card deck. 
+- test and implement table associations between categories and menuitems
+3. Need assistance / figure things out
+- May need further research in implementing sequelize associations with categories and menus
