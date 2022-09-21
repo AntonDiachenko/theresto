@@ -70,7 +70,18 @@
 3. Need assistance / figure things out
 - May need further research in implementing sequelize associations
 
-2022/09/20 Alex
+
+2022/09/21 Anton
+1. Done / not done since last scrum:
+- navbar and footer css 
+2. To do until next Scrum:
+- complete css for the menu page 
+3. Need assistance / figure things out
+- need to find solution for the links in the footer which don't work properly
+
+- clarify on routes for the menu.
+
+2022/09/21 Alex
 1. Done / not done since last scrum:
 - completed menu and comments routes
 - partially fixed issue on usermanage page with admin editing user profiles
