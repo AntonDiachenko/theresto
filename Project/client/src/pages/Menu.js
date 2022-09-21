@@ -8,7 +8,7 @@ function Menu() {
     let navigate = useNavigate();
 
     useEffect(() => {
-      axios.get("http://localhost:3001/Menu").then((response)=> {
+      axios.get("http://localhost:3001/menu").then((response)=> {
         setMenuList(response.data);
       });
     }, []);  
@@ -17,7 +17,7 @@ function Menu() {
     <div>
     {menuList.map((value, key) => {
         return (
-            <div className="menuitem" onClick={() =>{navigate(`/Menu/${value.id}`)}}> 
+            <div className="menuitem" onClick={() =>{navigate(`/menu/${value.id}`)}}> 
                 <div className="description"> {value.description} </div> 
                 <div className="price"> {value.price} </div> 
                 <div className="photoUrl"> {value.photoUrl} </div>

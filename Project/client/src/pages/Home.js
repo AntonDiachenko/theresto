@@ -8,7 +8,7 @@ function Home() {
 
 
     return (      
-        <div class="container">            
+        <div class="home-container">            
             home
            
             
