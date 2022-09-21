@@ -121,8 +121,8 @@ function App() {
                   <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg"></img>
                   facebook
                 </a>
-                {/* add the icon of facebook */}
 
+                {/* add the icon of facebook */}
                 <a
                   class="btn text-red btn-floating m-1"
                   href="#!"
