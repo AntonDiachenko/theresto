@@ -6,11 +6,27 @@ router.get("/", async (req, res) => {
   const menuList = await Menuitems.findAll();
   res.json(menuList);
 });
+//get nemuitems by categoryid, 1 to many
+router.get("/byId/:categoryid", async (req, res) => {
+  const categoryid = req.params.categoryid;
 
-router.get("/byId/:id", async (req, res) => {
+  const menuList = await Menuitems.findAll({
+    where: {
+      CategoryId: categoryid,
+    },
+  });
+  res.json(menuList);
+});
+//get nemuitems by menu id, 1 to 1
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const menuItem = await Menuitems.findByPk(id);
-  res.json(menuItem);
+
+  const menuList = await Menuitems.findOne({
+    where: {
+      id: id,
+    },
+  });
+  res.json(menuList);
 });
 
 router.post("/", async (req, res) => {
@@ -19,4 +35,13 @@ router.post("/", async (req, res) => {
   res.json(menuItem);
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  const menuItem = req.params.id;
+  await Menuitems.destroy({
+    where: {
+      id: menuItem,
+    },
+  });
+  res.json("delete");
+});
 module.exports = router;

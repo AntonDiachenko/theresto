@@ -18,10 +18,6 @@ function Usermanage() {
         setListOfUsers(response.data);
       });
 
-      // axios.get(`http://localhost:3001/auth/byId/${id}`
-      //   ).then((response)=>{
-      //     setUserObject(response.data);
-      // });
     }
   }, []);
 

@@ -10,9 +10,7 @@ module.exports = (sequelize, Datatypes) => {
   });
 
   Categories.associate = (models) => {
-    Categories.hasMany(models.Menuitems, {
-      onDelete: "cascade",
-    });
+    Categories.hasMany(models.Menuitems, {});
   };
 
   return Categories;
