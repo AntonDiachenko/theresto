@@ -23,7 +23,11 @@ import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
+
 import { SocialIcon } from "react-social-icons";
+
+import Item from "./pages/Item";
+
 
 function App() {
   // const navigate = useNavigate();
@@ -200,6 +204,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/update" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
+              <Route path="/menu/:id" element={<Item />} />
             </Routes>
           </div>
 
@@ -239,6 +244,7 @@ function App() {
                   </li>
                 </ul>
               </div>
+
 
               <div class="col mb-3">
                 <h5>Other</h5>
@@ -282,6 +288,7 @@ function App() {
 
             </footer>
           </div>
+
         </Router>
       </AuthContext.Provider>
     </div>

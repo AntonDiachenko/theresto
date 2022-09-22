@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -122,52 +123,6 @@ function Userupdate() {
         </div>
       </div>
 
-      {/* <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-        >
-          <Form className="formContainer">
-            <label>User Name:</label>
-            <ErrorMessage name="username" component="span" />
-            <input 
-            id="inputCreateUser" 
-            name="username" 
-            value={userObject.username}
-            >{userObject.username}</input>
-
-            
-
-            <label>Email:</label>
-            <ErrorMessage name="email" component="span" />
-            <Field
-              id="inputCreateUser"
-              name="email"
-              value={userObject.email}
-            />
-
-                     
-            <label>Phone:</label>
-            <ErrorMessage name="phone" component="span" />
-            <Field
-              id="inputCreateUser"
-              name="phone"
-              value={userObject.phone}
-            
-            />
-
-            <label>Role:</label>
-            <ErrorMessage name="role" component="span" />
-            <Field
-              id="inputCreateUser"
-              name="role"
-              placeholder="Your role"
-
-            />
-
-            <button type="submit">Add a new User</button>
-          </Form>
-        </Formik> */}
     </div>
   );
 }

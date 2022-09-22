@@ -13,8 +13,11 @@ const db = require("./models");
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
 
-const menuRouter = require("./routes/Menu");
+const menuRouter = require("./routes/Menuitems");
 app.use("/menu", menuRouter);
+
+const categoryRouter = require("./routes/Categories");
+app.use("/category", categoryRouter);
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {
