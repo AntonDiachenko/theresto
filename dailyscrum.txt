@@ -127,3 +127,12 @@
 3. Need assistance / figure things out
 - have a research in uploading files to cloud 
 
+2022/09/22 Anton
+1. Done / not done since last scrum:
+- completed css for the home page
+- fixed links in the footer  
+2. To do until next Scrum:
+- complete css for login, registration, itemManage pages
+- fix css in the nav bar do display nicely the name of the logged-in user and the logout button  
+3. Need assistance / figure things out
+- need to find solution for the links in the footer which don't work properly
