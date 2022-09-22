@@ -115,3 +115,15 @@
 - inner join sequelize
 - how to upload photos s3/azure
 - modal for menu page
+
+2022/09/22 XinShi
+1. Done / not done since last scrum:
+- completed the itemlist and the category list
+- completed display menuitem by each categoryid 
+- not finish the profile and the itemmanage page about the loading pic
+2. To do until next Scrum:
+- add the new menuitem page, (update, delete)
+- update the category 
+3. Need assistance / figure things out
+- have a research in uploading files to cloud 
+
