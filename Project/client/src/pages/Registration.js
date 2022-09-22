@@ -37,13 +37,13 @@ function Registration() {
 
   return (
     <div>
-      <div className="createUserPage">
+      <div className="reg-container">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          <Form className="formContainer">
+          <Form className="reg-form">
             <label>User Name:</label>
             <ErrorMessage name="username" component="span" />
             <Field 
