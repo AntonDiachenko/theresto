@@ -9,11 +9,9 @@ module.exports = (sequelize, Datatypes) => {
     },
   });
 
-  Categories.associate =(models)=>{
-      Categories.hasMany(models.Menuitems,{
-          
-      })
-  }
+  Categories.associate = (models) => {
+    Categories.hasMany(models.Menuitems, {});
+  };
 
   return Categories;
 };

@@ -28,7 +28,6 @@ import { SocialIcon } from "react-social-icons";
 
 import Item from "./pages/Item";
 
-
 function App() {
   // const navigate = useNavigate();
 
@@ -176,10 +175,7 @@ function App() {
                       <li>
                         {authState.username}
                         {authState.status && (
-                          <button
-                            className="btn btn-logout"
-                            onClick={logout}
-                          >
+                          <button className="btn btn-logout" onClick={logout}>
                             {" "}
                             Logout
                           </button>
@@ -245,7 +241,6 @@ function App() {
                 </ul>
               </div>
 
-
               <div class="col mb-3">
                 <h5>Other</h5>
                 <ul class="nav flex-column">
@@ -285,10 +280,8 @@ function App() {
                   <SocialIcon url="https://twitter.com" />
                 </span>
               </div>
-
             </footer>
           </div>
-
         </Router>
       </AuthContext.Provider>
     </div>

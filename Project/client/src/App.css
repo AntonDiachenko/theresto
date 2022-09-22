@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Julee');
+@import url("https://fonts.googleapis.com/css?family=Julee");
 
 .App {
   width: 100%;
@@ -9,8 +9,8 @@
 }
 
 #app-logo {
-  color:brown;
-  font-family: 'Julee';
+  color: brown;
+  font-family: "Julee";
   font-size: 100px;
   font-weight: bold;
 }
@@ -307,7 +307,6 @@ height: 120px;
 }
 */
 
-
 /*--------------BOOTSTRAP-------------*/
 
 .logo-container {
@@ -323,8 +322,8 @@ height: 120px;
 .home-container {
   margin: 0;
   padding: 0;
-  min-height: 900px;  
-  background-image: url('img/bg1.jpg');
+  min-height: 900px;
+  background-image: url("img/bg1.jpg");
   background-size: cover;
 }
 
@@ -333,7 +332,7 @@ height: 120px;
   padding: 40px;
   min-height: 300px;
   background-color: rgb(232, 240, 119);
-  font-family: 'Julee';
+  font-family: "Julee";
   text-align: center;
   color: brown;
 }
@@ -341,7 +340,6 @@ height: 120px;
 .hours-container h1 {
   font-size: 60px;
 }
-
 
 .footer-container {
   margin: 0;
@@ -362,10 +360,9 @@ height: 120px;
   margin: 0;
   padding: 10px 0px 10px 0px;
   background-color: rgb(232, 240, 119);
-
 }
 
-.nav-links-container{
+.nav-links-container {
   justify-content: center;
   text-align: center;
 }
@@ -373,7 +370,7 @@ height: 120px;
 .top-nav-item a {
   color: black;
   text-decoration: none;
-  font-family: 'Julee';
+  font-family: "Julee";
   font-size: 24px;
 }
 
@@ -393,7 +390,3 @@ height: 120px;
   height: 100vh;
   padding-top: 100px;
 }
-
-
-
-
