@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
-// post a new user
+// register a new user
 router.post("/", async (req, res) => {
   const user = ({ username, email, password, phone } = req.body);
 
@@ -29,9 +29,6 @@ router.post("/", async (req, res) => {
 //login as a user
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
-
-router.put("/update/:id", validateToken,  async(req,res)=>{
 
   const user = await Users.findOne({ where: { username: username } });
 
@@ -88,7 +85,6 @@ router.delete("/delete/:id", validateToken, async (req, res) => {
 
 // UPDATE --> EDIT
 router.put("/update/:id([0-9]+)", async (req, res) => {
-
   const userid = req.params.id;
   const user = req.body;
   await Users.update(

@@ -23,6 +23,7 @@ import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
+import Item from "./pages/Item";
 
 function App() {
   // const navigate = useNavigate();
@@ -161,6 +162,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/update/:id" element={<Userupdate />} />
             <Route path="/newuser" element={<Addnewuser />} />
+            <Route path="/menu/:id" element={<Item />} />
           </Routes>
         </Router>
       </AuthContext.Provider>
