@@ -205,7 +205,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/fav" element={<Favorite />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/update" element={<Userupdate />} />
+              <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
               <Route path="/menu/:id" element={<Item />} />
             </Routes>
