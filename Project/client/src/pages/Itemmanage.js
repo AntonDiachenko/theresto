@@ -16,7 +16,9 @@ function Itemmanage() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/menu`).then((response) => {
+      axios.get(`http://localhost:3001/menu`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      }).then((response) => {
         setListOfMenuitems(response.data);
       });
     }
@@ -24,35 +26,57 @@ function Itemmanage() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/category`).then((response) => {
+      axios.get(`http://localhost:3001/categories`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      }).then((response) => {
         setListOfCategories(response.data);
       });
     }
   }, []);
 
   const NewCategory = () => {
-    axios
-      .post("http://localhost:3001/category", {
-        name: name,
-      })
-      .then(() => {
-        navigate(0);
-      });
+    axios.post("http://localhost:3001/categories", {
+      name: name,
+  
+    }, {
+      headers: { accessToken: localStorage.getItem("accessToken") },
+    }).then(() => {
+      navigate(0);
+    });
   };
 
   const deleteCategory = (id) => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios
-        .delete(`http://localhost:3001/category/delete/${id}`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-        .then((response) => {
-          navigate(0);
-        });
+    axios.delete(`http://localhost:3001/categories/delete/${id}`
+    , {
+    headers: { accessToken: localStorage.getItem("accessToken") },
+  }
+  ).then((response)=>{
+    navigate(0);
+    });
+  }
+}
+
+
+const updateCategory = (id)=>{
+  if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+  } else {
+    axios.put(`http://localhost:3001/categories/update/${id}`,{
+      name: name,
     }
-  };
+  , {
+  headers: { accessToken: localStorage.getItem("accessToken") },
+}
+).then((response)=>{
+  navigate(0);
+  });
+}
+}
+
+
 
   return (
     <div class="d-flex  container col-12 mt-5">
@@ -123,41 +147,46 @@ function Itemmanage() {
       </div>
 
       <div class="col-9 mx-5">
-        <div className="row pre-scrollable">
-          <h2 className="col">Item List:</h2>
-          <button
-            className="btn btn-sm  btn-outline-danger  col-2"
-            onClick={() => {
-              navigate("/newitem");
-            }}
-          >
-            New Item
-          </button>
-        </div>
+            <div className="row pre-scrollable">
+              <h2 className="col" onClick={() => {
+                        axios.get(`http://localhost:3001/menu`).then((response) => {
+                          setListOfMenuitems(response.data);
+                        });
+                  
+                        }}>Item List:</h2>
+              <button
+                className="btn btn-sm  btn-outline-danger  col-2"
+                onClick={() => {
+                  navigate("/newitem");
+                }}
+              >
+                New Item
+              </button>
+            </div>
 
-        <table class="table table-hover col-9" name="menuitems">
-          <thead>
-            <tr>
-              <th className="col-1 flex-column">description</th>
-              <th className="col-1 flex-column">price</th>
-              <th className="col-2 flex-column">photoURL</th>
-            </tr>
-
-            {listOfMenuitems.map((value, key) => {
-              return (
-                <tr
-                  onClick={() => {
-                    navigate(`/menu/${value.id}`);
-                  }}
-                >
-                  <td className="col-1">{value.description}</td>
-                  <td className="col-1">{value.price}</td>
-                  <td className="col-2">{value.photoURL}</td>
+            <table class="table table-hover col-9" name="menuitems">
+              <thead>
+                <tr>
+                  <th className="col-1 flex-column">itemname</th>
+                  <th className="col-1 flex-column">description</th>
+                  <th className="col-1 flex-column">price</th>
+                  <th className="col-2 flex-column">photoURL</th>
                 </tr>
-              );
-            })}
-          </thead>
-        </table>
+
+                {listOfMenuitems.map((value, key) => {
+                  return (
+                    <tr onClick={() => {
+                      navigate(`/menu/${value.id}`);
+                    }}>
+                      <td className="col-1">{value.itemname}</td>
+                      <td className="col-1">{value.description}</td>
+                      <td className="col-1">{value.price}</td>
+                      <td className="col-2">{value.photoURL}</td>
+                    </tr>
+                  );
+                })}
+              </thead>
+            </table>
       </div>
     </div>
   );

@@ -4,14 +4,14 @@ import {
   Route,
   Routes,
   Link,
-  Navigate,
+
 } from "react-router-dom";
 
 import Home from "./pages/Home";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "./helper/AuthContext";
-import { useNavigate } from "react-router-dom";
+
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Menu from "./pages/Menu";
@@ -23,14 +23,13 @@ import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
+import Newitem from "./pages/Newitem";
 
 import { SocialIcon } from "react-social-icons";
 
 import Item from "./pages/Item";
 
 function App() {
-  // const navigate = useNavigate();
-
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
@@ -38,12 +37,14 @@ function App() {
     role: "",
   });
 
+
+
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState({ username: "", id: 0, status: false, role: "" });
+    setAuthState({ username: "", id: 0, status: false ,role: "",});
   };
 
-  const [user, setUser] = useState({});
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/auth/auth", {
@@ -57,13 +58,14 @@ function App() {
           setAuthState({ ...authState, status: false });
         } else {
           setAuthState({
-            username: response.data.username,
-            id: response.data.id,
-            status: true,
-            role: response.data.role,
-          });
+              username: response.data.username,
+              id: response.data.id,
+              status: true,
+              role:response.data.role,
+            });
         }
-      });
+      }
+      );
   }, []);
 
   return (
@@ -106,7 +108,7 @@ function App() {
                       </li>
                     </ul>
                   </>
-                ) : authState.role == "user" ? (
+                ) : (authState.role == "user" ) ? (
                   <>
                     {/* user */}
                     <ul className="nav justify-content-center">
@@ -134,6 +136,15 @@ function App() {
                         <Link to="/cart">
                           <a class="nav-link">Cart</a>
                         </Link>
+                      </li>
+                      <li>
+                        {authState.username}
+                        {authState.status && (
+                          <button className="btn btn-logout" onClick={logout}>
+                            {" "}
+                            Logout
+                          </button>
+                        )}
                       </li>
                       {/* <Link to="/profile"> Profile</Link> */}
                     </ul>
@@ -208,6 +219,7 @@ function App() {
               <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
               <Route path="/menu/:id" element={<Item />} />
+              <Route path="/newitem" element={<Newitem />} />
             </Routes>
           </div>
 
@@ -289,8 +301,9 @@ function App() {
               </div>
             </footer>
           </div>
-        </Router>
-      </AuthContext.Provider>
+          </Router>
+        </AuthContext.Provider>
+
     </div>
   );
 }

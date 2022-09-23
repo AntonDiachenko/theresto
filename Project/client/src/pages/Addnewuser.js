@@ -16,7 +16,9 @@ function Addnewuser() {
 
     const navigate = useNavigate();
     const onSubmit = (data) => {
-      axios.post("http://localhost:3001/auth", data
+      axios.post("http://localhost:3001/auth", data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      }
       
       ).then((response) => {
         navigate("/usermanage");
