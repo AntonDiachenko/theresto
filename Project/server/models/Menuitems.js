@@ -42,9 +42,5 @@ module.exports = (sequelize, Datatypes) => {
   //     })
   // }
 
-  // Categories.associate = (models) => {
-  //   Menuitems.belongsTo(models.Categories, {});
-  // };
-
   return Menuitems;
 };
