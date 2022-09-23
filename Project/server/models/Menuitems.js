@@ -23,7 +23,7 @@ module.exports = (sequelize, Datatypes) => {
     },
 
     photoURL: {
-      type: Datatypes.STRING(255),
+      type: Datatypes.STRING(1000),
       allowNull: true,
     },
   });
