@@ -24,7 +24,7 @@ function Itemmanage() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/category`).then((response) => {
+      axios.get(`http://localhost:3001/categories`).then((response) => {
         setListOfCategories(response.data);
       });
     }
@@ -32,7 +32,7 @@ function Itemmanage() {
 
   const NewCategory = () => {
     axios
-      .post("http://localhost:3001/category", {
+      .post("http://localhost:3001/categories", {
         name: name,
       })
       .then(() => {
@@ -45,7 +45,7 @@ function Itemmanage() {
       navigate("/login");
     } else {
       axios
-        .delete(`http://localhost:3001/category/delete/${id}`, {
+        .delete(`http://localhost:3001/categories/delete/${id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {

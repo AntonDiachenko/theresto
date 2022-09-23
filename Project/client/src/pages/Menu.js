@@ -2,10 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Modal from "./Modal";
 
 function Menu() {
+  const { id } = useParams();
   const [categoryList, setCategoryList] = useState([]);
   const [menuList, setMenuList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -16,26 +21,35 @@ function Menu() {
     axios.get("http://localhost:3001/Menu").then((response) => {
       setMenuList(response.data);
     });
+
+    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
+    //   setMenuList(response.data);
+    // });
   }, []);
 
   return (
-    // d-flex flex-row auction1 container col-6 left mb-5
-    <div className="d-flex flex-row bd-highlight mb-3 ">
-      <div className="p-2 bd-highlight">
-        <div className="row">
-          <h2 className="col">Categories:</h2>
-        </div>
-        <table className="table">
+    <div className="d-flex  container col-12 mb-5">
+      <div className="col-3 mx-5">
+        <table className="table table-hover" name="categories">
           <thead>
             <tr>
-              <th className="col">Categories:</th>
+              <th className="flex-column col-1">Categories</th>
             </tr>
 
             {categoryList.map((value, key) => {
               return (
                 <tr>
-                  <td className="col">
-                    <a href="#cat-jump">{value.name}</a>
+                  <td
+                    className="col-6"
+                    onClick={() => {
+                      axios
+                        .get(`http://localhost:3001/menu/byId/${value.id}`)
+                        .then((response) => {
+                          setMenuList(response.data);
+                        });
+                    }}
+                  >
+                    <a>{value.name}</a>
                   </td>
                 </tr>
               );
@@ -44,32 +58,56 @@ function Menu() {
         </table>
       </div>
 
-      <div className="p-2">
-        <div className="row">
-          <h2 className="col" id="cat-jump">
-            Categories Name
-          </h2>
-        </div>
-
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div className="col-9 mx-5">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
           {menuList.map((value, key) => {
             return (
-              <div class="col">
-                <div class="card h-100">
-                  <img class="card-img-top" src="..." alt="Card cap" />
+              <div className="col">
+                <div className="card h-100">
+                  <img src="..." className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5
+                      className="card-title"
+                      onClick={() => {
+                        setModalOpen(true);
+                      }}
+                    >
+                      {value.itemname}
+                    </h5>
 
-                  <div class="card-body">
-                    <h5 class="card-title">{value.itemname}</h5>
-                    <p class="card-text">{value.description}</p>
-                    <p class="card-text">
-                      <small class="text-muted">{value.price}</small>
-                    </p>
+                    <p className="card-text">{value.description}</p>
+                  </div>
+                  <div className="card-footer">
+                    <p className="text-muted">${value.price}</p>
                   </div>
                 </div>
               </div>
             );
           })}
+          {modalOpen && <Modal setOpenModal={setModalOpen} />}
         </div>
+
+        {/* <table class="table table-hover col-9" name="menuitems">
+          <thead>
+            <tr>
+              <th className="col-1 flex-column">item name</th>
+              <th className="col-1 flex-column">description</th>
+              <th className="col-1 flex-column">price</th>
+              <th className="col-2 flex-column">photoURL</th>
+            </tr>
+
+            {menuList.map((value, key) => {
+              return (
+                <tr>
+                  <td className="col-1">{value.itemname}</td>
+                  <td className="col-1">{value.description}</td>
+                  <td className="col-1">${value.price}</td>
+                  <td className="col-2">{value.photoURL}</td>
+                </tr>
+              );
+            })}
+          </thead>
+        </table> */}
       </div>
     </div>
   );
