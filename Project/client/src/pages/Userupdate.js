@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -62,12 +61,15 @@ function Userupdate() {
   const [role, setRole] = useState([]);
 
   return (
-    <div>
-      <div className="">
-        <h1>Update Info:{userObject.username}</h1>
-        <div className="form">
-          <label>User Name:</label>
+    <div className="login-container">
+      <div className="formContainer">
+        <h3>Update info: {userObject.username}</h3>
+        <br></br>
+
+        <div className="form-outline mb-4">
+          <label className="form-label">User Name:</label>
           <input
+            className="form-control"
             type="text"
             name="userName"
             defaultValue={userObject.username}
@@ -75,11 +77,12 @@ function Userupdate() {
               setUserName(e.target.value);
             }}
           />
-          {/* {userObject.username}
-          </input> */}
-
-          <label>Email:</label>
+          {/* {userObject.username} </input> */}
+        </div>
+        <div className="form-outline mb-4">
+          <label className="form-label">Email:</label>
           <input
+            className="form-control"
             type="text"
             name="email"
             defaultValue={userObject.email}
@@ -87,9 +90,11 @@ function Userupdate() {
               setEmail(e.target.value);
             }}
           />
-
-          <label>Phone:</label>
+        </div>
+        <div className="form-outline mb-4">
+          <label className="form-label">Phone:</label>
           <input
+            className="form-control"
             type="text"
             name="phone"
             defaultValue={userObject.phone}
@@ -97,9 +102,11 @@ function Userupdate() {
               setPhone(e.target.value);
             }}
           />
-
-          <label>Role:</label>
+        </div>
+        <div className="form-outline mb-4">
+          <label className="form-label">Role:</label>
           <input
+            className="form-control"
             type="text"
             name="role"
             defaultValue={userObject.role}
@@ -107,8 +114,10 @@ function Userupdate() {
               setRole(e.target.value);
             }}
           />
-
+        </div>
+        <div className="form-outline mb-4">
           <button
+            className="login-button"
             onClick={() => {
               update({
                 username: userName,
@@ -122,11 +131,8 @@ function Userupdate() {
           </button>
         </div>
       </div>
-
     </div>
   );
 }
 
 export default Userupdate;
-
-
