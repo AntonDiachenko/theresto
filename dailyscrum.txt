@@ -136,3 +136,14 @@
 - fix css in the nav bar do display nicely the name of the logged-in user and the logout button  
 3. Need assistance / figure things out
 - need to find solution for the links in the footer which don't work properly
+
+2022/09/23 Alex
+1. Done / not done since last scrum:
+- finished menu page 
+- tried to put modal for menu items but not working
+2. To do until next Scrum:
+- add to cart quantity feature on menu page
+- start building cart page
+3. Need assistance / figure things out
+- how to upload photos s3/azure
+- modal for menu page (not working so far)
