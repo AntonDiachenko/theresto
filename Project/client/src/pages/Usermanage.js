@@ -10,7 +10,7 @@ function Usermanage() {
   const [username, setUsername] = useState([]);
   let navigate = useNavigate();
   const [userObject, setUserObject] = useState([])
-  const [htmlObject, setHtmlObject] = useState([])
+ 
 
 
 
@@ -23,7 +23,6 @@ function Usermanage() {
       }).then((response) => {
         setListOfUsers(response.data);
       });
-
     }
   }, []);
 

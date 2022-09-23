@@ -152,47 +152,54 @@ function App() {
                 ) : (
                   <>
                     {/* admin */}
-                    <ul className="nav justify-content-center">
-                      <li className="nav-item top-nav-item">
-                        <Link to="/">
-                          <a class="nav-link">Home Page</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/menu">
-                          <a class="nav-link">Menu</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/contact">
-                          <a class="nav-link">Contact</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/usermanage">
-                          <a class="nav-link">UserManage</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/itemmanage">
-                          <a class="nav-link">ItemManage</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/historymanage">
-                          <a class="nav-link">HistoryManage</a>
-                        </Link>
-                      </li>
-                      <li>
-                        {authState.username}
+                    <div>
+                      <ul className="nav justify-content-center">
+                        <li className="nav-item top-nav-item">
+                          <Link to="/">
+                            <a class="nav-link">Home Page</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/menu">
+                            <a class="nav-link">Menu</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/contact">
+                            <a class="nav-link">Contact</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/usermanage">
+                            <a class="nav-link">UserManage</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/itemmanage">
+                            <a class="nav-link">ItemManage</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/historymanage">
+                            <a class="nav-link">HistoryManage</a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="welcome-container">
+                      <div>
+                        <h4><span id="welcome">Welcome</span> {authState.username}</h4>
+                      </div>      
+                      <div className="logout-btn-container">
                         {authState.status && (
-                          <button className="btn btn-logout" onClick={logout}>
+                          <button className="login-button" onClick={logout}>
                             {" "}
                             Logout
                           </button>
-                        )}
-                      </li>
-                    </ul>
+                        )}                        
+                      </div>                  
+
+                    </div>
                   </>
                 )}
               </div>

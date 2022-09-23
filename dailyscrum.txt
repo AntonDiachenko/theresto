@@ -102,3 +102,37 @@
 - itemmanage page
 3. Need assistance / figure things out
 - have a research in uploading files to cloud 
+
+2022/09/22 Alex
+1. Done / not done since last scrum:
+- build structure for menu page with categories list and menuitems card deck (bootstrap)
+2. To do until next Scrum:
+- inner join categories and menuitems list 
+- finish menu page
+- add to cart quantity feature on menu page
+- start building cart page
+3. Need assistance / figure things out
+- inner join sequelize
+- how to upload photos s3/azure
+- modal for menu page
+
+2022/09/22 XinShi
+1. Done / not done since last scrum:
+- completed the itemlist and the category list
+- completed display menuitem by each categoryid 
+- not finish the profile and the itemmanage page about the loading pic
+2. To do until next Scrum:
+- add the new menuitem page, (update, delete)
+- update the category 
+3. Need assistance / figure things out
+- have a research in uploading files to cloud 
+
+2022/09/22 Anton
+1. Done / not done since last scrum:
+- completed css for the home page
+- fixed links in the footer  
+2. To do until next Scrum:
+- complete css for login, registration, itemManage pages
+- fix css in the nav bar do display nicely the name of the logged-in user and the logout button  
+3. Need assistance / figure things out
+- need to find solution for the links in the footer which don't work properly
