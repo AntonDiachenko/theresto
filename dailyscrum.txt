@@ -147,3 +147,12 @@
 3. Need assistance / figure things out
 - how to upload photos s3/azure
 - modal for menu page (not working so far)
+
+2022/09/23 Anton
+1. Done / not done since last scrum:
+- completed css for login, registration, itemManage pages
+- fixed css in the nav bar 
+- added a button "order now" on the home page to take the user to the menu page
+2. To do until next Scrum:
+- create UI for the cart page
+3. Need assistance / figure things out
