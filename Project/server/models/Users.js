@@ -1,42 +1,58 @@
-module.exports = (sequelize, Datatypes)=>{
-    const Users = sequelize.define("Users",{
-        username:{
-            type: Datatypes.STRING(100),
-            allowNull: false,
-        },
-        email:{
-            type: Datatypes.STRING(320),
-            allowNull: false
-        },
-        password:{
-            type: Datatypes.STRING,
-            allowNull: false,
+module.exports = (sequelize, Datatypes) => {
+  const Users = sequelize.define("Users", {
+    username: {
+      type: Datatypes.STRING(255),
+      allowNull: false,
+      validate: {
+        len: [2, 20],
+      },
+    },
+    email: {
+      type: Datatypes.STRING(255),
+      allowNull: false,
+      validate: {
+        isEmail: true,
+        len: [5, 50],
+      },
+    },
+    password: {
+      type: Datatypes.STRING(255),
+      allowNull: false,
+    },
+    phone: {
+      type: Datatypes.STRING(255),
+      allowNull: false,
+    },
+    role: {
+      type: Datatypes.ENUM({
+        values: [
+          "admin",
+          // 'moderator',
+          "user",
+        ],
+      }),
 
-        },
-        phone:{
-            type: Datatypes.STRING,
-            allowNull: false,
+      defaultValue: "user",
+    },
+  });
 
-        },
-        role:{
-            type: Datatypes.ENUM({
-                values: ['admin', 
-                // 'moderator',
-                 'user']
-              }),
-            
-            defaultValue:"user",
-        },
+  // Users.associate =(models)=>{
+  //     Users.hasMany(models.Cartitems,{
+  //         onDelete:"cascade",
+  //     })
+  // }
 
+  // Users.associate =(models)=>{
+  //     Users.hasMany(models.Orders,{
+  //         onDelete:"cascade",
+  //     })
+  // }
 
-    });
+  // Users.associate =(models)=>{
+  //     Users.hasMany(models.Payments,{
+  //         onDelete:"cascade",
+  //     })
+  // }
 
-
-    // Users.associate =(models)=>{
-    //     Users.hasMany(models.Historys,{
-    //         onDelete:"cascade",
-    //     })
-    // }
-
-    return Users;
-}
+  return Users;
+};

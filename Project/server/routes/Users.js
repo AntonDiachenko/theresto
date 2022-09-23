@@ -119,17 +119,4 @@ router.get("/auth", validateToken, (req, res) => {
   res.json(req.user);
 });
 
-// get users by username
-router.get("/:username", async (req, res) => {
-  const name = req.params.username;
-  const user = await Users.findOne({ where: { username: name } });
-  // if (!user) {res.json({ error: "User Doesn't Exist" });}
-  // else{      res.json(user);}
-  if (!user) {
-    res.status(404).json("The user is not found");
-  } else {
-    res.status(200).json(user);
-  }
-});
-
 module.exports = router;
