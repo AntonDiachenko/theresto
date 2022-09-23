@@ -6,13 +6,11 @@ import { useParams } from "react-router-dom";
 
 // add hover to table, and overdisplay
 function Itemmanage() {
-
   const { id } = useParams();
   const [name, setName] = useState("");
   const [listOfMenuitems, setListOfMenuitems] = useState([]);
   const [listOfCategories, setListOfCategories] = useState([]);
   let navigate = useNavigate();
-  
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -21,8 +19,7 @@ function Itemmanage() {
       axios.get(`http://localhost:3001/menu`).then((response) => {
         setListOfMenuitems(response.data);
       });
-
-    };
+    }
 
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
@@ -30,112 +27,140 @@ function Itemmanage() {
       axios.get(`http://localhost:3001/category`).then((response) => {
         setListOfCategories(response.data);
       });
-
-    };
-
+    }
   }, []);
 
   const NewCategory = () => {
-    axios.post("http://localhost:3001/category", {
-      name: name,
-  
-    }).then(() => {
-      navigate(0);
-    });
+    axios
+      .post("http://localhost:3001/category", {
+        name: name,
+      })
+      .then(() => {
+        navigate(0);
+      });
   };
 
-  const deleteCategory = (id)=>{
+  const deleteCategory = (id) => {
     if (!localStorage.getItem("accessToken")) {
-        navigate("/login");
+      navigate("/login");
     } else {
-    axios.delete(`http://localhost:3001/category/delete/${id}`
-    , {
-    headers: { accessToken: localStorage.getItem("accessToken") },
-  }
-  ).then((response)=>{
-    navigate(0);
-    });
-  }
-}
-
+      axios
+        .delete(`http://localhost:3001/category/delete/${id}`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          navigate(0);
+        });
+    }
+  };
 
   return (
-    <div class="d-flex  container col-12 mb-5">
+    <div class="d-flex  container col-12 mt-5">
       <div class="col-3 mx-5">
-          <table class="table table-hover" name="categories">
-              <thead>
-                <tr>
-                  <th className="flex-column col-1">Categories</th>
-                </tr>
+        <table class="table table-hover" name="categories">
+          <thead>
+            <tr>
+              <th className="flex-column col-1">Categories</th>
+            </tr>
 
-                {listOfCategories.map((value, key) => {
-                  return (
-                    <tr >
-                      <td className="col-6" onClick={() => {
-                        axios.get(`http://localhost:3001/menu/byId/${value.id}`).then((response) => {
+            {listOfCategories.map((value, key) => {
+              return (
+                <tr>
+                  <td
+                    className="col-6"
+                    onClick={() => {
+                      axios
+                        .get(`http://localhost:3001/menu/byId/${value.id}`)
+                        .then((response) => {
                           setListOfMenuitems(response.data);
                         });
-                  
-                        }}><a>{value.name}</a></td>
-                      <button className='btn btn-sm  btn-outline-danger col-6' onClick={()=>{deleteCategory(value.id)}}>Delete</button>
-                      <button className='btn btn-sm  btn-outline-danger col-6' onClick={()=>{}}>update</button>
-
-                    </tr>
-                  );
-                })}
-              
-                <tr >
-                  <div className="row">
-                  <td className="col"><input className="col" type="text" name="name" onChange={(e) => {
-            setName(e.target.value);
-          }} placeholder="New Category+"></input>
-                   </td>
-                   <button type="submit" className="btn btn-sm btn-secondary col-4 " 
-                     onClick={NewCategory}
-                   >New</button>
-                   </div>
+                    }}
+                  >
+                    <a>{value.name}</a>
+                  </td>
+                  <button
+                    className="btn btn-sm  btn-outline-danger col-6"
+                    onClick={() => {
+                      deleteCategory(value.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="btn btn-sm  btn-outline-danger col-6"
+                    onClick={() => {}}
+                  >
+                    update
+                  </button>
                 </tr>
-              </thead>
-            </table>
+              );
+            })}
+
+            <tr>
+              <div className="row">
+                <td className="col">
+                  <input
+                    className="col"
+                    type="text"
+                    name="name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    placeholder="New Category+"
+                  ></input>
+                </td>
+                <button
+                  type="submit"
+                  className="btn btn-sm btn-secondary col-4 "
+                  onClick={NewCategory}
+                >
+                  New
+                </button>
+              </div>
+            </tr>
+          </thead>
+        </table>
       </div>
 
       <div class="col-9 mx-5">
-            <div className="row pre-scrollable">
-              <h2 className="col">Item List:</h2>
-              <button
-                className="btn btn-sm  btn-outline-danger  col-2"
-                onClick={() => {
-                  navigate("/newitem");
-                }}
-              >
-                New Item
-              </button>
-            </div>
+        <div className="row pre-scrollable">
+          <h2 className="col">Item List:</h2>
+          <button
+            className="btn btn-sm  btn-outline-danger  col-2"
+            onClick={() => {
+              navigate("/newitem");
+            }}
+          >
+            New Item
+          </button>
+        </div>
 
-            <table class="table table-hover col-9" name="menuitems">
-              <thead>
-                <tr>
-                  <th className="col-1 flex-column">description</th>
-                  <th className="col-1 flex-column">price</th>
-                  <th className="col-2 flex-column">photoURL</th>
+        <table class="table table-hover col-9" name="menuitems">
+          <thead>
+            <tr>
+              <th className="col-1 flex-column">description</th>
+              <th className="col-1 flex-column">price</th>
+              <th className="col-2 flex-column">photoURL</th>
+            </tr>
+
+            {listOfMenuitems.map((value, key) => {
+              return (
+                <tr
+                  onClick={() => {
+                    navigate(`/menu/${value.id}`);
+                  }}
+                >
+                  <td className="col-1">{value.description}</td>
+                  <td className="col-1">{value.price}</td>
+                  <td className="col-2">{value.photoURL}</td>
                 </tr>
-
-                {listOfMenuitems.map((value, key) => {
-                  return (
-                    <tr onClick={() => {
-                      navigate(`/menu/${value.id}`);
-                    }}>
-                      <td className="col-1">{value.description}</td>
-                      <td className="col-1">{value.price}</td>
-                      <td className="col-2">{value.photoURL}</td>
-                    </tr>
-                  );
-                })}
-              </thead>
-            </table>
+              );
+            })}
+          </thead>
+        </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Itemmanage
+export default Itemmanage;

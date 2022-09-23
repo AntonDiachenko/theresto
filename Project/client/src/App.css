@@ -317,15 +317,36 @@ height: 120px;
 .general-container {
   margin: 0;
   padding: 0;
-  background-color: rgb(230, 228, 231);
+  background-color: rgb(238, 230, 243);
 }
 
 .home-container {
-  margin: 0;
-  padding: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   min-height: 900px;  
   background-image: url('img/bg1.jpg');
   background-size: cover;
+}
+
+
+.order-now {
+  width: 350px;
+  height: 100px;
+  color: brown;
+  text-decoration: underline;
+  font-size: 60px;
+  border-radius: 10px;
+  border-color: transparent;
+  background: transparent;
+  font-family: 'Julee';
+}
+
+.order-now:hover {
+  border-color: brown;
+  background-color: rgb(232, 240, 119);
+  text-decoration: none;
 }
 
 .hours-container {
@@ -385,6 +406,52 @@ height: 120px;
   text-decoration: none;
 }
 
+
+.login-container {
+  margin-top: 70px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.login-button{
+  background-color: rgb(232, 240, 119);
+  color: black;
+  border-radius: 7px;
+  width: 100px;
+  height: 40px;
+  border-color: lightgray;
+}
+
+.login-button:hover{
+  background-color: rgb(232, 232, 233);
+  color: black;
+}
+
+.welcome-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#welcome {
+  color: gray;
+}
+
+.logout-btn-container {
+  margin-left: 30px;
+  font-size: 18px;
+}
+
+
 .reg-container {
   display: flex;
   align-items: center;
@@ -394,6 +461,24 @@ height: 120px;
   padding-top: 100px;
 }
 
+.crud-button {
+  width: 100px;
+  color: brown;
+  background-color: rgb(232, 232, 233);;
+  border-color: brown;
+  border-radius: 5px;
+  margin: 0px 5px 0px 5px;
+
+}
+
+.crud-button:hover {
+  color: rgb(232, 232, 233);
+  background-color: brown;
+}
+
+.add-user-container{
+  display: flex;
+}
 
 
 
