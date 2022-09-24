@@ -177,4 +177,11 @@
 - stripe payment integration 
 
 
-
+2022/09/24 Anton
+1. Done / not done since last scrum:
+- redone a part of lost code from the previous day
+- started creating UI for the cart page
+2. To do until next Scrum:
+- research on Amazon S3 photos upload 
+- set up the Amazon account for cloud hosting 
+3. Need assistance / figure things out
