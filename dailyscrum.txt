@@ -185,3 +185,13 @@
 - research on Amazon S3 photos upload 
 - set up the Amazon account for cloud hosting 
 3. Need assistance / figure things out
+
+
+2022/09/24 XinShi
+1. Done / not done since last scrum:
+- completed favorites pages
+- researched on inner join
+2. To do until next Scrum:
+- add count function to menu
+- finished the profile page
+3. Need assistance / figure things out
