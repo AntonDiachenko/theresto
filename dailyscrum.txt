@@ -156,3 +156,13 @@
 2. To do until next Scrum:
 - create UI for the cart page
 3. Need assistance / figure things out
+
+2022/09/23 XinShi
+1. Done / not done since last scrum:
+- completed itemManage pages
+- fixed the navigator change after refreshing
+- completed the usermanage pages
+2. To do until next Scrum:
+- create favorites page
+- finished the profile page
+3. Need assistance / figure things out
