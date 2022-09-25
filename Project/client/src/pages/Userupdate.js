@@ -63,7 +63,7 @@ function Userupdate() {
   return (
     <div className="login-container">
       <div className="formContainer">
-        <h3>Update Info: {userObject.username}</h3>
+        <h3>Update info: {userObject.username}</h3>
         <br></br>
 
         <div className="form-outline mb-4">
@@ -77,10 +77,8 @@ function Userupdate() {
               setUserName(e.target.value);
             }}
           />
-          {/* {userObject.username}
-          </input> */}
+          {/* {userObject.username} </input> */}
         </div>
-
         <div className="form-outline mb-4">
           <label className="form-label">Email:</label>
           <input
@@ -93,7 +91,6 @@ function Userupdate() {
             }}
           />
         </div>
-
         <div className="form-outline mb-4">
           <label className="form-label">Phone:</label>
           <input
@@ -106,7 +103,6 @@ function Userupdate() {
             }}
           />
         </div>
-
         <div className="form-outline mb-4">
           <label className="form-label">Role:</label>
           <input

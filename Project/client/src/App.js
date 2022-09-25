@@ -5,25 +5,27 @@ import Home from "./pages/Home";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "./helper/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Menu from "./pages/Menu";
 import Usermanage from "./pages/Usermanage";
 import Itemmanage from "./pages/Itemmanage";
 import Historymanage from "./pages/Historymanage";
-import Profile from "./pages/Profile";
-import Favorite from "./pages/Favorite";
+
+import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
-import Newitem from "./pages/Newitem";
 
+import Profile from "./pages/Profile";
 import { SocialIcon } from "react-social-icons";
 
 import Item from "./pages/Item";
 
 function App() {
+  // const navigate = useNavigate();
+
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
@@ -213,13 +215,12 @@ function App() {
               <Route path="/usermanage" element={<Usermanage />} />
               <Route path="/itemmanage" element={<Itemmanage />} />
               <Route path="/historymanage" element={<Historymanage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/fav" element={<Favorite />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/fav" element={<Favorites />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
               <Route path="/menu/:id" element={<Item />} />
-              <Route path="/newitem" element={<Newitem />} />
             </Routes>
           </div>
 

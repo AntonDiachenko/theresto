@@ -72,6 +72,29 @@ router.get("/byId/:id([0-9]+)", async (req, res) => {
   }
 });
 
+router.get("/byuserId", validateToken, async (req, res) => {
+  const id = req.user.id;
+  const user = await Users.findByPk(id);
+  if (!user) {
+    res.status(404).json("The user is not found");
+  } else {
+    res.status(200).json(user);
+  }
+});
+
+
+// get users by username
+router.get("/byname/:username", validateToken, async (req, res) => {
+  const username = req.params.username;
+  const user = await Users.findOne({ where: { username: username } });
+  if (!user) {
+    res.status(404).json("The user is not found");
+  } 
+  else {
+    res.status(200).json(user);
+  }
+});
+
 //DELETE
 router.delete("/delete/:id", validateToken, async (req, res) => {
   const userid = req.params.id;
@@ -100,19 +123,6 @@ router.put("/update/:id([0-9]+)", async (req, res) => {
   res.json(req.body);
 });
 
-// UPDATE --> PATCH
-// router.patch("/edit/:id", async (req, res) => {
-//   const userid = req.params.id;
-//   const username = req.body.username;
-//   const role = req.body.role;
-//   const email = req.body.email;
-//   const phone = req.body.phone;
-//   await Users.update(
-//     { username: username, role: role, email: email, phone: phone },
-//     { where: { id: userid } }
-//   );
-//   res.json("updated!");
-// });
 
 // auth route to check if there is a valid token or not
 router.get("/auth", validateToken, (req, res) => {

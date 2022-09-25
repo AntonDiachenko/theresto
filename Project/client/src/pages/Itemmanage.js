@@ -16,39 +16,25 @@ function Itemmanage() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios
-        .get(`http://localhost:3001/menu`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-        .then((response) => {
-          setListOfMenuitems(response.data);
-        });
+      axios.get(`http://localhost:3001/menu`).then((response) => {
+        setListOfMenuitems(response.data);
+      });
     }
 
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios
-        .get(`http://localhost:3001/categories`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-        .then((response) => {
-          setListOfCategories(response.data);
-        });
+      axios.get(`http://localhost:3001/category`).then((response) => {
+        setListOfCategories(response.data);
+      });
     }
   }, []);
 
   const NewCategory = () => {
     axios
-      .post(
-        "http://localhost:3001/categories",
-        {
-          name: name,
-        },
-        {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        }
-      )
+      .post("http://localhost:3001/category", {
+        name: name,
+      })
       .then(() => {
         navigate(0);
       });
@@ -59,7 +45,7 @@ function Itemmanage() {
       navigate("/login");
     } else {
       axios
-        .delete(`http://localhost:3001/categories/delete/${id}`, {
+        .delete(`http://localhost:3001/category/delete/${id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {

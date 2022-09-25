@@ -7,22 +7,16 @@ import { useParams } from "react-router-dom";
 function Usermanage() {
   const { id } = useParams();
   const [listOfUsers, setListOfUsers] = useState([]);
-  const [username, setUsername] = useState([]);
+
   let navigate = useNavigate();
-  const [userObject, setUserObject] = useState([]);
-  const [htmlObject, setHtmlObject] = useState([]);
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios
-        .get(`http://localhost:3001/auth`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-        .then((response) => {
-          setListOfUsers(response.data);
-        });
+      axios.get(`http://localhost:3001/auth`).then((response) => {
+        setListOfUsers(response.data);
+      });
     }
   }, []);
 

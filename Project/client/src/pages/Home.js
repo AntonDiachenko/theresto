@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Menu from "./Menu";
 
 function Home() {
   let navigate = useNavigate();
