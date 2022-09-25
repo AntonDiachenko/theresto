@@ -3,12 +3,23 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../helper/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Menu from "./Menu";
 
 function Home() {
+  let navigate = useNavigate();
+
   return (
     <div>
       <div className="home-container">
-        <h1></h1>
+        <button
+          className="order-now"
+          onClick={() => {
+            navigate("/menu");
+          }}
+        >
+          Order Now
+        </button>
       </div>
       <div className="hours-container">
         <h1>Opening Hours</h1>
