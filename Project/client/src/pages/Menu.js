@@ -2,10 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Menu() {
+  const { id } = useParams();
   const [categoryList, setCategoryList] = useState([]);
   const [menuList, setMenuList] = useState([]);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -16,26 +19,65 @@ function Menu() {
     axios.get("http://localhost:3001/Menu").then((response) => {
       setMenuList(response.data);
     });
+
+    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
+    //   setMenuList(response.data);
+    // });
   }, []);
 
+  async function addToCart(id, quantity) {
+    try {
+      const response = await fetch("http://localhost:3001/cart", {
+        method: "POST",
+        body: JSON.stringify({
+          productId: id,
+          quantity: quantity,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item Added To Cart");
+      console.log(data);
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
+
   return (
-    // d-flex flex-row auction1 container col-6 left mb-5
-    <div className="d-flex flex-row bd-highlight mb-3 ">
-      <div className="p-2 bd-highlight">
-        <div className="row">
-          <h2 className="col">Categories:</h2>
-        </div>
-        <table className="table">
+    <div className="d-flex container col-12 my-5">
+      <div className="col-3 px-3">
+        <table className="table table-hover" name="categories">
           <thead>
             <tr>
-              <th className="col">Categories:</th>
+              <th
+                className="flex-column col-1 menu-item-hover"
+                onClick={() => {
+                  axios.get(`http://localhost:3001/menu`).then((response) => {
+                    setMenuList(response.data);
+                  });
+                }}
+              >
+                All Categories
+              </th>
             </tr>
 
             {categoryList.map((value, key) => {
               return (
                 <tr>
-                  <td className="col">
-                    <a href="#cat-jump">{value.name}</a>
+                  <td
+                    className="menu-item-hover"
+                    onClick={() => {
+                      axios
+                        .get(`http://localhost:3001/menu/byId/${value.id}`)
+                        .then((response) => {
+                          setMenuList(response.data);
+                        });
+                    }}
+                  >
+                    <a>{value.name}</a>
                   </td>
                 </tr>
               );
@@ -44,26 +86,26 @@ function Menu() {
         </table>
       </div>
 
-      <div className="p-2">
-        <div className="row">
-          <h2 className="col" id="cat-jump">
-            Categories Name
-          </h2>
-        </div>
-
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div className="col-9 px-3">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
           {menuList.map((value, key) => {
             return (
-              <div class="col">
-                <div class="card h-100">
-                  <img class="card-img-top" src="..." alt="Card cap" />
+              <div className="col">
+                <div className="card h-100">
+                  <img src="..." className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">{value.itemname}</h5>
 
-                  <div class="card-body">
-                    <h5 class="card-title">{value.itemname}</h5>
-                    <p class="card-text">{value.description}</p>
-                    <p class="card-text">
-                      <small class="text-muted">{value.price}</small>
-                    </p>
+                    <p className="card-text">{value.description}</p>
+                  </div>
+                  <div className="card-footer">
+                    <p className="text-muted">${value.price}</p>
+                    <button
+                      onClick={(e) => addToCart(value.id, 1)}
+                      className="btn btn-success btn-sm"
+                    >
+                      Add to cart
+                    </button>
                   </div>
                 </div>
               </div>

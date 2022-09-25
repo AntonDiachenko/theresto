@@ -30,11 +30,11 @@ module.exports = (sequelize, Datatypes) => {
 
   // NEEDS CATEGORY ID FK
 
-  // Menuitems.associate =(models)=>{
-  //     Menuitems.hasMany(models.Cartitems,{
-  //         onDelete:"cascade",
-  //     })
-  // }
+  Menuitems.associate =(models)=>{
+      Menuitems.hasMany(models.Cartitems,{
+          onDelete:"cascade",
+      })
+  }
 
   // Menuitems.associate =(models)=>{
   //     Menuitems.hasMany(models.Orderitems,{

@@ -18,6 +18,9 @@ app.use("/menu", menuRouter);
 const categoryRouter = require("./routes/Categories");
 app.use("/categories", categoryRouter);
 
+const cartitemsRouter = require("./routes/Cartitems");
+app.use("/cart", cartitemsRouter);
+
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {
     console.log("Server running on port 3001");

@@ -1,94 +1,85 @@
-
 import React from "react";
 import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-  
+
 function Newitem() {
+  let navigate = useNavigate();
 
+  const initialValues = {
+    itemname: "",
+    description: "",
+    price: "",
+    photoURL: "",
+    CategoryId: "",
+  };
 
+  const onSubmit = (data) => {
+    axios
+      .post(`http://localhost:3001/menu`, data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        navigate("/Itemmanage");
+      });
+  };
 
-    let navigate = useNavigate();
-
-
-    const initialValues = {
-        itemname:"",
-        description:"",
-        price:"",
-        photoURL:"",
-        CategoryId:"",
-    };
-
-    const onSubmit = (data) => {
-        axios
-          .post(`http://localhost:3001/menu`, data, {
-            headers: { accessToken: localStorage.getItem("accessToken") },
-          })
-          .then((response) => {
-            navigate("/Itemmanage");
-          });
-      };
-
-      const validationSchema= Yup.object().shape({
-        itemname:Yup.string().required(), 
-        description:Yup.string().required(), 
-        price:Yup.number().required(), 
-        photoURL:Yup.string().max(10000),
-        CategoryId:Yup.number().required()
-    }); 
-    
-
-
+  const validationSchema = Yup.object().shape({
+    itemname: Yup.string().required(),
+    description: Yup.string().required(),
+    price: Yup.number().required(),
+    photoURL: Yup.string().max(10000),
+    CategoryId: Yup.number().required(),
+  });
 
   return (
-    <div>
-<div className="reg-container">
+    <div className="login-container">
+      <div className="formContainer">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          <Form className="reg-form">
-            <label>Item Name:</label>
+          <Form>
+            <div className="form-outline mb-4">
+            <label className="form-label">Item Name:</label>
             <ErrorMessage name="itemname" component="span" />
-            <Field 
-            name="itemname" 
-            />
+            <Field className="form-control" name="itemname" />              
+            </div>
 
-            <label>Description:</label>
+            <div className="form-outline mb-4">
+            <label className="form-label">Description:</label>
             <ErrorMessage name="description" component="span" />
-            <Field
-              name="description"
+            <Field className="form-control" name="description" />              
+            </div>
 
-            />
-
-            <label>Price:</label>
+            <div className="form-outline mb-4">
+            <label className="form-label">Price:</label>
             <ErrorMessage name="price" component="span" />
-            <Field
-              name="price"
-            />
+            <Field className="form-control" name="price" />
+            </div>
 
-            <label>PhotoURL:</label>
+            <div className="form-outline mb-4">
+            <label className="form-label">PhotoURL:</label>
             <ErrorMessage name="photoURL" component="span" />
-            <Field
-              name="photoURL"
-            />
+            <Field className="form-control" name="photoURL" />              
+            </div>
 
-            <label>CategoryId:</label>
+            <div className="form-outline mb-4">
+            <label className="form-label">CategoryId:</label>
             <ErrorMessage name="CategoryId" component="span" />
-            <Field
-              name="CategoryId"
-            />
+            <Field className="form-control" name="CategoryId" />              
+            </div>
 
-            <button type="submit">NewItem</button>
+
+            <button type="submit" className="login-button">Add Item</button>
           </Form>
         </Formik>
       </div>
 
-
-        {/* <div className="">
+      {/* <div className="">
        
             <div className="form">
             <label>Item Name:</label>
@@ -135,7 +126,7 @@ function Newitem() {
             </div>
         </div> */}
     </div>
-  )
+  );
 }
 
-export default Newitem
+export default Newitem;
