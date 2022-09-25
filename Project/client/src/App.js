@@ -18,13 +18,14 @@ import Menu from "./pages/Menu";
 import Usermanage from "./pages/Usermanage";
 import Itemmanage from "./pages/Itemmanage";
 import Historymanage from "./pages/Historymanage";
-import Profile from "./pages/Profile";
-import Favorite from "./pages/Favorite";
+
+import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
 import Newitem from "./pages/Newitem";
 
+import Profile from "./pages/Profile";
 import { SocialIcon } from "react-social-icons";
 
 import Item from "./pages/Item";
@@ -129,7 +130,7 @@ function App() {
                       </li>
                       <li className="nav-item top-nav-item">
                         <Link to="/fav">
-                          <a class="nav-link">Favorite</a>
+                          <a class="nav-link">favorites</a>
                         </Link>
                       </li>
                       <li className="nav-item top-nav-item">
@@ -206,8 +207,8 @@ function App() {
               <Route path="/usermanage" element={<Usermanage />} />
               <Route path="/itemmanage" element={<Itemmanage />} />
               <Route path="/historymanage" element={<Historymanage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/fav" element={<Favorite />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/fav" element={<Favorites />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />

@@ -106,7 +106,9 @@ function Usermanage() {
           }}></input>
           <button className="btn btn-sm  btn-outline-danger  col-2"
           onClick={ () => {
-            axios.get(`http://localhost:3001/auth/${username}`).then((response) => {
+            axios.get(`http://localhost:3001/auth/byname/${username}`, {
+              headers: { accessToken: localStorage.getItem("accessToken") },
+            }).then((response) => {
               setUserObject(response.data);
               
             });

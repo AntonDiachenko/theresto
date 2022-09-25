@@ -26,15 +26,29 @@ module.exports = (sequelize, Datatypes) => {
       type: Datatypes.STRING(1000),
       allowNull: true,
     },
-  });
 
-  // NEEDS CATEGORY ID FK
+    // isfav:{
+    //   type:Datatypes.BOOLEAN,
+    //   defaultValue:false,
+    // },
+    // iscart:{
+    //   type:Datatypes.BOOLEAN,
+    //   defaultValue:false,
+    // }
+})
 
-  // Menuitems.associate =(models)=>{
-  //     Menuitems.hasMany(models.Cartitems,{
-  //         onDelete:"cascade",
-  //     })
-  // }
+
+Menuitems.associate =(models)=>{
+      Menuitems.hasMany(models.Favorites,{
+          onDelete:"cascade",
+      });
+    //   Menuitems.hasMany(models.Cartitems,{
+    //     onDelete:"cascade",
+    // })
+  }
+
+  
+
 
   // Menuitems.associate =(models)=>{
   //     Menuitems.hasMany(models.Orderitems,{

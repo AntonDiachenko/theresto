@@ -3,7 +3,7 @@ const router = express.Router();
 const { Categories } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/", async (req, res) => {
+router.get("/", validateToken, async (req, res) => {
   const categoryList = await Categories.findAll();
   res.json(categoryList);
 });
@@ -13,6 +13,7 @@ router.post("/", validateToken, async (req, res) => {
   await Categories.create(categoryItem);
   res.json(categoryItem);
 });
+
 
 router.delete("/delete/:id", validateToken, async (req, res) => {
   const id = req.params.id;

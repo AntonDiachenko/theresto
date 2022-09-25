@@ -4,12 +4,12 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 const express = require("express");
 const router = express.Router();
 
-router.get("/",  async (req, res) => {
+router.get("/", validateToken,  async (req, res) => {
   const menuList = await Menuitems.findAll();
   res.json(menuList);
 });
 //get nemuitems by categoryid, 1 to many
-router.get("/byId/:categoryid",  async (req, res) => {
+router.get("/byId/:categoryid", validateToken,  async (req, res) => {
   const categoryid = req.params.categoryid;
 
   const menuList = await Menuitems.findAll({
@@ -20,7 +20,7 @@ router.get("/byId/:categoryid",  async (req, res) => {
   res.json(menuList);
 });
 //get nemuitems by menu id, 1 to 1
-router.get("/:id",  async (req, res) => {
+router.get("/:id", validateToken,  async (req, res) => {
   const id = req.params.id;
 
   const menuList = await Menuitems.findOne({
