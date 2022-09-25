@@ -195,3 +195,14 @@
 - add count function to menu
 - finished the profile page
 3. Need assistance / figure things out
+
+
+2022/09/25 XinShi
+1. Done / not done since last scrum:
+- completed favorites pages
+- compeleted carts pages
+2. To do until next Scrum:
+- fix the errors of the button(fav, addto cart)
+- submit the cart to orders
+- deploy the app to cloud
+3. Need assistance / figure things out
