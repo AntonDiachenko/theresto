@@ -67,5 +67,11 @@ module.exports = (sequelize, Datatypes) => {
 
 
 
+    Users.associate =(models)=>{
+        Users.hasMany(models.Cartitems,{
+            onDelete:"cascade",
+        })
+    }
+
     return Users;
 }

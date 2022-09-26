@@ -8,12 +8,12 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 
 
 function Item() {
+  const { id } = useParams();
 
-    const { id } = useParams();
+  const [menuitem, setMenuitem] = useState([]);
 
-    const [menuitem, setMenuitem] = useState([]);
+  let navigate = useNavigate();
 
-    let navigate = useNavigate();
 
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
@@ -42,11 +42,10 @@ function Item() {
       ).then((response)=>{
             navigate("/itemmanage");
         });
-      }
     }
+  };
 
-
-    
+ 
 
     const initialValues = {
         newitemname:"",
@@ -73,6 +72,7 @@ function Item() {
             
     };
     }
+
 
     const Schema= Yup.object().shape({
     newitemname:Yup.string().required(), 
@@ -168,14 +168,11 @@ function Item() {
                         <button className="btn btn-success  col-12" type='submit' >Update</button>
                     </Form>
             </Formik>
-            </div>
+        </div>
 
-
-
-    </div> 
- 
-    
-  )
+    </div>
+  
+  );
 }
 
-export default Item
+export default Item;

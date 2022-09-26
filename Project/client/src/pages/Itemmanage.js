@@ -82,7 +82,6 @@ const updateCategory = (id)=>{
 }
 
 
-
   return (
     <div class="d-flex  container col-12 mb-5">
       <div class="col-3 mx-5">

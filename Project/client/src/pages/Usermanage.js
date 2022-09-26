@@ -49,15 +49,6 @@ function Usermanage() {
           Add User
         </button>
       </div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th className="col-1">UserId</th>
-            <th className="col-1">UserName</th>
-            <th className="col-2">Email</th>
-            <th className="col-2">Phone</th>
-            <th className="col-1">Role</th>
-          </tr>
 
           {listOfUsers.map((value, key) => {
             return (
@@ -89,9 +80,7 @@ function Usermanage() {
               </tr>
             );
           })}
-        </thead>
-      </table>
-    
+   
         <div class=" container-md mt-5">
           
           

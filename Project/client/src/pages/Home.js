@@ -1,7 +1,4 @@
 import React from "react";
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { AuthContext } from "../helper/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";

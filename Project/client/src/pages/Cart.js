@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 
 import React from "react";
 import { useEffect, useState } from "react";
@@ -192,6 +193,6 @@ const multiple=(a,b)=>{
       </div>
     </div>
   );
-}
+};
 
 export default Cart;
