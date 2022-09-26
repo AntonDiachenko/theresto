@@ -229,3 +229,10 @@
 3. Need assistance / figure things out
 - host on cloud
 
+2022/09/24 Anton
+1. Done / not done since last scrum:
+-
+2. To do until next Scrum:
+- research on photos upload 
+- research on cloud hosting 
+3. Need assistance / figure things out
