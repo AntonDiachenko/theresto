@@ -1,12 +1,11 @@
 
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import axios from "axios";
-import { AuthContext } from "../helper/AuthContext";
 
 function Profile() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+ 
+
   const [userObject, setUserObject] = useState("");
   const [listOfFav, setListOfFav] = useState([]);
   // const { authState } = useContext(AuthContext);

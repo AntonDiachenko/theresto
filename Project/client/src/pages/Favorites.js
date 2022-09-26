@@ -29,7 +29,7 @@ function Favorites() {
         { MenuitemId: id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )}
-      const addToCart = (quantity, itemname, price) => {
+  const addToCart = (quantity, itemname, price) => {
         if (!localStorage.getItem("accessToken")) {
           navigate("/login");
         } else {
@@ -80,20 +80,11 @@ function Favorites() {
                   <div  className="row card-footer">
                     <div className="col-6">
                         <p className="text-muted ">${value.price}</p>
-                        <div className="row">
-                          <button onClick={()=>{
-                            setCount(count+1);
-                          }} className="col">+</button>
-                          <div  className="col">{count}</div>
-                          <button onClick={()=>{
-                            setCount(count-1);
-                          }}  className="col mx-1">-</button>
-                        </div>
                       </div>
-
                           <button  className="btn btn-sm  btn-outline-danger  col-3"
                                 onClick={ ()=>{
-                                  favpost(value.id);
+                                  favpost(value.MenuitemId);
+                                  navigate(0);
                                   // addorcancel(value.id);
                                 }
                                 // {buttonText}
@@ -101,7 +92,7 @@ function Favorites() {
                                 >cancel</button>
                           <button
                             onClick={(e) =>
-                              addToCart( count, value.itemname, value.price)
+                              addToCart( 1, value.itemname, value.price)
                             }
                             className="btn btn-success btn-sm col-3"
                           >

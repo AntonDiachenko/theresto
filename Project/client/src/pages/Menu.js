@@ -10,7 +10,7 @@ function Menu() {
   const { id } = useParams();
   const [categoryList, setCategoryList] = useState([]);
   const [menuList, setMenuList] = useState([]);
-  const [count, setCount] = useState(0);
+
   const navigate = useNavigate();
 
 
@@ -37,23 +37,23 @@ function Menu() {
   const [buttonText, setButtonText] = useState();
 
 
-  const addorcancel= (id)=>{
+  // const addorcancel= (id)=>{
 
-    axios
-    .get(`http://localhost:3001/fav/byId/${id}`,
-    { headers: { accessToken: localStorage.getItem("accessToken") } 
-    })
-    .then((response) => {
-      setUserObject(response.data);
-    });
+  //   axios
+  //   .get(`http://localhost:3001/fav/byId/${id}`,
+  //   { headers: { accessToken: localStorage.getItem("accessToken") } 
+  //   })
+  //   .then((response) => {
+  //     setUserObject(response.data);
+  //   });
     
-    if (userObject.MenuitemId==id){
-      setButtonText('cancel'); 
-    }else{
-      setButtonText('add to favorite'); 
-    }
+  //   if (userObject.MenuitemId==id){
+  //     setButtonText('cancel'); 
+  //   }else{
+  //     setButtonText('add to favorite'); 
+  //   }
 
-  }
+  // }
 
   const favpost = (id) => {
     axios
@@ -63,29 +63,7 @@ function Menu() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )}
 
-      // async function addToCart(id, quantity) {
-      //   try {
-      //     const response = await fetch("http://localhost:3001/cart", {
-      //       method: "POST",
-      //       body: JSON.stringify({
-      //         productId: id,
-      //         quantity: quantity,
-      //       }),
-      //       headers: {
-      //         "Content-type": "application/json; charset=UTF-8",
-      //       },
-      //     });
-      //     let data = await response.json();
-      //     alert("Item Added To Cart");
-      //     console.log(data);
-      //   } catch (err) {
-      //     alert("Something Went Wrong");
-      //     console.log(err);
-      //   }
-      // }
-
-
-      const addToCart = (quantity, itemname, price) => {
+      const addToCart = (quantity, MenuitemId, price) => {
         if (!localStorage.getItem("accessToken")) {
           navigate("/login");
         } else {
@@ -95,7 +73,7 @@ function Menu() {
               {
         
                 quantity: quantity,
-                itemname: itemname,
+                MenuitemId: MenuitemId,
                 price: price,
              
               },
@@ -164,8 +142,7 @@ function Menu() {
             return (
               <div className="col">
                 <div className="card h-100 ">
-                  <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D
-" className="card-img-top" alt="..." />
+                  <img src={value.photoURL} className="card-img-top" alt="..." />
                   <div className="card-body ">
                     <h5
                       className="card-title"
@@ -180,17 +157,6 @@ function Menu() {
                   <div className="row card-footer">
                   <div className="col-6">
                     <p className="text-muted ">${value.price}</p>
-                    
-                    <div className="row">
-                      <button onClick={()=>{
-                        setCount(count+1);
-                      }} className="col">+</button>
-                      <div  className="col">{count}</div>
-                      <button onClick={()=>{
-                        setCount(count-1);
-                      }}  className="col mx-1">-</button>
-                    </div>
-
                   </div>
                       {/* <BookmarkAddIcon onClick={ ()=>{
                           favpost(value.id);
@@ -198,16 +164,15 @@ function Menu() {
                     <button  className="btn btn-sm  btn-outline-danger  col-3 "
                         onClick={ ()=>{
                           favpost(value.id);
-                          
-                          // addorcancel(value.id);
+                     
                         }
-                        // {buttonText}
+                        
                         }
                         >fav
                     </button>
                     <button
                       onClick={(e) =>
-                        addToCart( count, value.itemname, value.price)
+                        addToCart( 1, value.id, value.price)
                       }
                       className="btn btn-success btn-sm col-3"
                     >

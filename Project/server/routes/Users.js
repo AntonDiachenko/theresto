@@ -82,7 +82,6 @@ router.get("/byuserId", validateToken, async (req, res) => {
   }
 });
 
-
 // get users by username
 router.get("/byname/:username", validateToken, async (req, res) => {
   const username = req.params.username;
