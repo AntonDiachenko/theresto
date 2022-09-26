@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-//import { AuthContext } from "../helpers/AuthContext";
+// import { AuthContext } from "../helpers/AuthContext";
 
 function Cart() {
   const navigate = useNavigate();
@@ -192,6 +192,8 @@ const multiple=(a,b)=>{
       </div>
     </div>
   );
-}
+};
+
+            {/* <tr> total :{total +=plus(value.quantity,value.price)}</tr> */}
 
 export default Cart;

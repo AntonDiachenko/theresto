@@ -89,9 +89,7 @@ function Usermanage() {
               </tr>
             );
           })}
-        </thead>
-      </table>
-    
+          </thead>
         <div class=" container-md mt-5">
           
           
@@ -136,10 +134,11 @@ function Usermanage() {
                       <span class="input-group-text col-3">Role:</span>  
                       <div className="form-control col">{userObject.role}</div>
                   </div>
-             
+                     
               </div>
-  
+
         </div>
+</table> 
     </div>
   );
 }
