@@ -17,16 +17,14 @@ import Login from "./pages/Login";
 import Menu from "./pages/Menu";
 import Usermanage from "./pages/Usermanage";
 import Itemmanage from "./pages/Itemmanage";
-import Historymanage from "./pages/Historymanage";
-
+// import Historymanage from "./pages/Historymanage";
 import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
-
+import Newitem from "./pages/Newitem";
 import Profile from "./pages/Profile";
 import { SocialIcon } from "react-social-icons";
-
 import Item from "./pages/Item";
 
 function App() {
@@ -90,11 +88,11 @@ function App() {
                           <a class="nav-link">Menu</a>
                         </Link>
                       </li>
-                      <li className="nav-item top-nav-item">
+                      {/* <li className="nav-item top-nav-item">
                         <Link to="/contact">
-                          <a class="nav-link">Contact</a>
+                          <a class="nav-link" >Contact</a>
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item top-nav-item">
                         <Link to="/login">
                           <a class="nav-link">Login</a>
@@ -154,11 +152,11 @@ function App() {
                             <a class="nav-link">Menu</a>
                           </Link>
                         </li>
-                        <li className="nav-item top-nav-item">
+                        {/* <li className="nav-item top-nav-item">
                           <Link to="/contact">
                             <a class="nav-link">Contact</a>
                           </Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item top-nav-item">
                           <Link to="/usermanage">
                             <a class="nav-link">UserManage</a>
@@ -169,14 +167,17 @@ function App() {
                             <a class="nav-link">ItemManage</a>
                           </Link>
                         </li>
-                        <li className="nav-item top-nav-item">
+                        {/* <li className="nav-item top-nav-item">
                           <Link to="/historymanage">
                             <a class="nav-link">HistoryManage</a>
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
-                    <div className="welcome-container">
+                    
+                  </>
+                )}
+                <div className="welcome-container">
                       <div>
                         <h4><span id="welcome">Welcome</span> {authState.username}</h4>
                       </div>      
@@ -190,8 +191,6 @@ function App() {
                       </div>                  
 
                     </div>
-                  </>
-                )}
               </div>
             </div>
 
@@ -202,13 +201,14 @@ function App() {
               <Route path="/menu" element={<Menu />} />
               <Route path="/usermanage" element={<Usermanage />} />
               <Route path="/itemmanage" element={<Itemmanage />} />
-              <Route path="/historymanage" element={<Historymanage />} />
+              {/* <Route path="/historymanage" element={<Historymanage />} /> */}
               <Route path="/Profile" element={<Profile />} />
               <Route path="/fav" element={<Favorites />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
               <Route path="/menu/:id" element={<Item />} />
+              <Route path="/newitem" element={<Newitem />} />
             </Routes>
           </div>
 

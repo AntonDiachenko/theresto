@@ -4,11 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-function Usermanage() {
-  const { id } = useParams();
-  const [listOfUsers, setListOfUsers] = useState([]);
 
+function Usermanage() {
+
+  const [listOfUsers, setListOfUsers] = useState([]);
+  const [username, setUsername] = useState([]);
   let navigate = useNavigate();
+  const [userObject, setUserObject] = useState([])
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -35,7 +37,7 @@ function Usermanage() {
   };
 
   return (
-    <div class="container-md mt-5">
+    <div class="container-md mt-5 ">
       <div className="add-user-container">
         <h2 className="col">User List:</h2>
         <button
@@ -89,6 +91,55 @@ function Usermanage() {
           })}
         </thead>
       </table>
+    
+        <div class=" container-md mt-5">
+          
+          
+             <div className='container '>
+                    <div className="add-user-container">
+                      <h2 className="col">Info of the User:</h2> 
+                      <input type="text" placeholder="search by username" onChange={(e) => {
+                          setUsername(e.target.value);
+                        }}>
+                        
+                      </input>
+                      <button className="crud-button  col-1"
+                          onClick={ () => {
+                          axios.get(`http://localhost:3001/auth/byname/${username}`, {
+                            headers: { accessToken: localStorage.getItem("accessToken") },
+                          }).then((response) => {
+                            setUserObject(response.data);
+                            
+                          });
+                    
+                          }}
+                          >search
+                      </button>
+                  </div>
+                  <div className="input-group mb-1">
+                      <span class="input-group-text col-3">UserId:</span> 
+                      <div className='form-control col'>{userObject.id}</div>
+                  </div>
+                  <div className="input-group mb-1">
+                      <span class="input-group-text col-3">Username:</span> 
+                      <div className='form-control col'>{userObject.username}</div>
+                  </div>
+                  <div className="input-group my-2">
+                      <span class="input-group-text col-3">Email:</span> 
+                      <div className="form-control col">{userObject.email}</div>
+                  </div>
+                  <div className="input-group my-2">
+                      <span class="input-group-text col-3  ">Phone:</span> 
+                      <div className="form-control col text-break ">{userObject.phone}</div>      
+                  </div>
+                  <div className="input-group my-2">    
+                      <span class="input-group-text col-3">Role:</span>  
+                      <div className="form-control col">{userObject.role}</div>
+                  </div>
+             
+              </div>
+  
+        </div>
     </div>
   );
 }

@@ -1,0 +1,359 @@
+import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+
+function Menu() {
+  const { id } = useParams();
+  const [categoryList, setCategoryList] = useState([]);
+  const [menuList, setMenuList] = useState([]);
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/Categories",
+    { headers: { accessToken: localStorage.getItem("accessToken") } 
+    }).then((response) => {
+      setCategoryList(response.data);
+    });
+
+    axios.get("http://localhost:3001/Menu",
+    { headers: { accessToken: localStorage.getItem("accessToken") } 
+    }).then((response) => {
+      setMenuList(response.data);
+    });
+
+    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
+    //   setMenuList(response.data);
+    // });
+  }, []);
+
+  const favpost = (id) => {
+    axios
+      .post(
+        "http://localhost:3001/fav",
+        { MenuitemId: id },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )}
+
+  return (
+    <div className="d-flex  container col-12 mb-5">
+      <div className="col-3 mx-5">
+        <table className="table table-hover" name="categories">
+          <thead>
+          <tr>
+              <th className="flex-column col-1" onClick={() => {
+                        axios.get(`http://localhost:3001/menu`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        }).then((response) => {
+                          setMenuList(response.data);
+                        });
+                  
+                        }}>All Categories</th>
+            </tr>
+
+            {categoryList.map((value, key) => {
+              return (
+                <tr>
+                  <td
+                    className="col-6"
+                    onClick={() => {
+                      axios
+                        .get(`http://localhost:3001/menu/byId/${value.id}`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        })
+                        .then((response) => {
+                          setMenuList(response.data);
+                        });
+                    }}
+                  >
+                    <a>{value.name}</a>
+                  </td>
+                </tr>
+              );
+            })}
+          </thead>
+        </table>
+      </div>
+
+      <div className="col-9 mx-5">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {menuList.map((value, key) => {
+            return (
+              <div className="col">
+                <div className="card h-100">
+                  <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D
+" className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5
+                      className="card-title"
+                     
+                    >
+                      {value.itemname}
+                    </h5>
+
+                    <p className="card-text">{value.description}</p>
+                  </div>
+                  <div className="card-footer">
+                    <p className="text-muted">${value.price}</p>
+                  </div>
+                  <button  className="btn btn-sm  btn-outline-danger  col-2"
+          onClick={ ()=>{
+            favpost(value.id);
+          }}
+           >fav</button>
+                </div>
+              </div>
+            );
+          })}
+         
+        </div>
+
+       
+      </div>
+    </div>
+  );
+}
+
+export default Menu;
+
+
+
+import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+
+function Menu() {
+  
+  const [categoryList, setCategoryList] = useState([]);
+  const [menuList, setMenuList] = useState([]);
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/Categories",
+    { headers: { accessToken: localStorage.getItem("accessToken") } 
+    }).then((response) => {
+      setCategoryList(response.data);
+    });
+
+    axios.get("http://localhost:3001/Menu",
+    { headers: { accessToken: localStorage.getItem("accessToken") } 
+    }).then((response) => {
+      setMenuList(response.data);
+    });
+
+    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
+    //   setMenuList(response.data);
+    // });
+  }, []);
+  const [buttonText, setButtonText] = useState('add to favorite');
+  const addorcancel= ()=>{
+  
+      if (buttonText == "add to favorite"){
+        setButtonText('cancel'); 
+      }else{
+        setButtonText('add to favorite'); 
+      }
+ 
+    }
+    
+  
+
+  const favpost = (id) => {
+    axios
+      .post(
+        "http://localhost:3001/fav",
+        { MenuitemId: id },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )}
+
+  return (
+    <div className="d-flex  container col-12 mb-5">
+      <div className="col-3 mx-5">
+        <table className="table table-hover" name="categories">
+          <thead>
+          <tr>
+              <th className="flex-column col-1" onClick={() => {
+                        axios.get(`http://localhost:3001/menu`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        }).then((response) => {
+                          setMenuList(response.data);
+                        });
+                  
+                        }}>All Categories</th>
+            </tr>
+
+            {categoryList.map((value, key) => {
+              return (
+                <tr>
+                  <td
+                    className="col-6"
+                    onClick={() => {
+                      axios
+                        .get(`http://localhost:3001/menu/byId/${value.id}`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        })
+                        .then((response) => {
+                          setMenuList(response.data);
+                        });
+                    }}
+                  >
+                    <a>{value.name}</a>
+                  </td>
+                </tr>
+              );
+            })}
+          </thead>
+        </table>
+      </div>
+
+      <div className="col-9 mx-5">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {menuList.map((value, key) => {
+            return (
+              <div className="col">
+                <div className="card h-100">
+                  <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D
+" className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5
+                      className="card-title"
+                     
+                    >
+                      {value.itemname}
+                    </h5>
+
+                    <p className="card-text">{value.description}</p>
+                  </div>
+                  <div className="row card-footer">
+                    <p className="text-muted col-6">${value.price}</p>
+                    <button  className="btn btn-sm  btn-outline-danger  col-6"
+          onClick={ ()=>{
+            favpost(value.id);
+            addorcancel();
+          }
+            
+        }
+           >{buttonText}</button>
+                  </div>
+                  
+           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+                </div>
+              </div>
+            );
+          })}
+         
+        </div>
+
+       
+      </div>
+    </div>
+  );
+}
+
+export default Menu;
+
+
+
+
+
+
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate} from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../helper/AuthContext";
+
+function Profile() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [userObject, setUserObject] = useState("");
+  const [listOfFav, setListOfFav] = useState([]);
+  // const { authState } = useContext(AuthContext);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/auth/byuserId`).then((response) => {
+      setUserObject(response.data)
+    });
+
+    axios.get(`http://localhost:3001/fav/byuserId`).then((response) => {
+      setListOfFav(response.data);
+    });
+  }, []);
+
+  return (
+    <div className="profilePageContainer">
+      <div className="basicInfo">
+        aaaa
+        <h1> Username: {userObject.username} </h1>
+                       <div className="input-group mb-1">
+                    <span class="input-group-text col-3">UserId:</span> 
+                    <div className='form-control col'>{userObject.id}</div>
+                </div>
+                <div className="input-group mb-1">
+                    <span class="input-group-text col-3">Username:</span> 
+                    <div className='form-control col'>{userObject.username}</div>
+                </div>
+                <div className="input-group my-2">
+                    <span class="input-group-text col-3">Email:</span> 
+                    <div className="form-control col">{userObject.email}</div>
+                </div>
+                <div className="input-group my-2">
+                    <span class="input-group-text col-3  ">Phone:</span> 
+                    <div className="form-control col text-break ">{userObject.phone}</div>      
+                </div>
+                <div className="input-group my-2">    
+                    <span class="input-group-text col-3">Role:</span>  
+                    <div className="form-control col">{userObject.role}</div>
+                </div>
+        {/* {authState.username === username && (
+          <button
+            onClick={() => {
+              navigate("/changepassword");
+            }}
+          >
+            {" "}
+            Change My Password
+          </button>
+        )} */}
+      </div>
+      <div className="listOfFav">
+        {listOfFav.map((value, key) => {
+          return (
+            <div key={key} className="post">
+              <div className="title"> {value.title} </div>
+              <div
+                className="body"
+                onClick={() => {
+                 navigate(`/post/${value.id}`);
+                }}
+              >
+
+
+
+
+
+
+
+                {value.postText}
+              </div>
+              <div className="footer">
+                <div className="username">{value.username}</div>
+                <div className="buttons">
+                  <label> {value.Likes.length}</label>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default Profile;

@@ -1,29 +1,119 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { AuthContext } from "../helpers/AuthContext";
 
 function Cart() {
-  
+  const navigate = useNavigate();
+  const [count, setCount] = useState(0);
   const [cartList, setCartList] = useState([]);
-  function plus(a,b){
-    return a*b
-  }
+  const [jsonObject, setJsonObject] = useState(0);
+  var sum=0;
+  var tax=0;
+  var Total=0;
+
+  
+  // getTotals(state, action) {
+  //   let { total, quantity } = state.cartItems.reduce(
+  //     (cartTotal, cartItem) => {
+  //       const { price, cartQuantity } = cartItem;
+  //       const itemTotal = price * cartQuantity;
+
+  //       cartTotal.total += itemTotal;
+  //       cartTotal.quantity += cartQuantity;
+
+  //       return cartTotal;
+  //     },
+  //     {
+  //       total: 0,
+  //       quantity: 0,
+  //     }
+  //   );
+const multiple=(a,b)=>{
+  const itemTotal = a * b;
+
+  sum = sum + itemTotal;
+  tax = sum*0.15;
+  Total = sum+tax;
+  return itemTotal;
+}
+  
+  
+
+
   useEffect(() => {
-    axios.get(`http://localhost:3001/cart/byuserId`,
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+      axios.get(`http://localhost:3001/cart/byuserId`,
     { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
       setCartList(response.data);
       
     });
+    };
+
+    
   }, []);
 
+
+  const updatequantity =(id,quantity) => {
+    
+    axios.put(`http://localhost:3001/cart/update`,{
+      MenuitemId:id,
+      quantity:quantity+1
+    },
+    { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
+     navigate(0);
+   
+    });
+    
+  }
+
+  
+  const favpost = (id) => {
+    axios
+      .post(
+        "http://localhost:3001/fav",
+        { MenuitemId: id },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )}
+
+  const addToCart = (quantity, MenuitemId, price) => {
+        if (!localStorage.getItem("accessToken")) {
+          navigate("/login");
+        } else {
+          axios
+            .post(
+              "http://localhost:3001/cart",
+              {
+        
+                quantity: quantity,
+                MenuitemId: MenuitemId,
+                price: price,
+             
+              },
+              {
+                headers: {
+                  accessToken: localStorage.getItem("accessToken"),
+                },
+              }
+            )
+            .then((response) => {
+              if (response.data.error) {
+                console.log(response.data.error);
+              } else {
+                alert("Item Added To Cart");
+              }
+            });
+        }
+      };
 
 
   return (
     <div>
-      <div class=" container col-5  mb-5">
+      <div class=" container col  mb-5">
         <div className="row">
           <h2 className="col">Cart List:</h2>
         </div>
@@ -31,22 +121,71 @@ function Cart() {
         <table class="table table-striped">
           <thead>
             <tr>
-              <th className="col-1">Itemname</th>
-              <th className="col-1">quantity</th>
+              <th className="col-4">Item</th>
+              <th className="col-3">quantity</th>
               <th className="col-2">price</th>
-              <th className="col-1">total</th>
+              <th className="col-3">subtotal</th>
             </tr>
 
             {cartList.map((value, key) => {
               return ( 
             <tr>
-              <td className="col-1">{value.itemname}</td>
-              <td className="col-1">{value.quantity}</td>
-              <td className="col-2">{value.price}</td>
-              <td className="col-3" >'plus(value.quantity,value.price)';</td>
+              <td className="col-4">
+                  <div className="d-flex row row-cols-2 h-50 col-12">
+                        <div className=" col-5 h-50 ">
+                            <img className=" col-12" src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D" />
+                        </div>
+                        <div className=" col-7">
+                            <div className=" " > Itemname :</div>
+                            <div className=" mb-3" > {value.itemname} </div> 
+                            <div className=" " >  Item Description :</div>
+                            <div className="mb-3 " > {value.description} </div> 
+                        </div>
+                               
+                  </div>
+              </td>
+              <td className="col-2">
+                <div className="row">
+                        <button onClick={()=>{
+                          setCount(count+1);
+                        }} className="col-1">+</button>
+                        <div  className="col-2">{value.quantity}</div>
+                        <button onClick={()=>{
+                          setCount(count-1);
+                          if (count=0) {
+                            favpost = (value.MenuitemId) 
+                          }
+                        }}  className="col-1 mx-1">-</button>
+                </div>
+              </td>
+              <td className="col-2">$ {value.price}</td>
+              <td className="col-3" >$ {multiple(value.quantity, value.price)}</td>
+              
             </tr>
+            
+            // 3个问题，1 数量，2数量改变subtotal跟着改变，3确定提交order
               );
             })}
+            <tr>
+            <td>{}</td>
+            <td>{}</td>
+            <td>Sum:</td>
+                <td>$ {sum}</td>
+            </tr>
+            <tr>
+            <td>{}</td>
+            <td>{}</td>
+            <td>Tax:</td>
+                <td>$ {tax}</td>
+            </tr>
+            <tr>
+            <td>{}</td>
+            <td>{}</td>
+            <td>Total:</td>
+                <td>$ {Total}</td>
+            </tr>
+
+            {/* <tr> total :{total +=plus(value.quantity,value.price)}</tr> */}
           </thead>
         </table>
         

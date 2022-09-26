@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Menuitems } = require("../models");
-
+const { validateToken } = require("../middlewares/AuthMiddleware");
 router.get("/", validateToken,  async (req, res) => {
   const menuList = await Menuitems.findAll();
   res.json(menuList);
@@ -44,4 +44,17 @@ router.delete("/delete/:id", async (req, res) => {
   });
   res.json("delete");
 });
+
+router.put("/update/:id", validateToken,  async(req,res)=>{
+  const menuid = req.params.id;
+  const item = req.body;
+  await Menuitems.update({ 
+    itemname:item.newitemname,
+    description:item.newdescription,
+    price:item.newprice,
+    photoURL:item.newphotoURL
+    }, { where: { id: menuid} });
+  res.json(req.body);
+  
+  });
 module.exports = router;

@@ -38,7 +38,7 @@ function Addnewuser() {
 
   return (
     <div>
-      <div className="createAuctionPage">
+      <div className="container col-6">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
