@@ -3,8 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function Menu() {
   const { id } = useParams();
@@ -13,103 +13,107 @@ function Menu() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    axios.get("http://localhost:3001/Categories",
-    { headers: { accessToken: localStorage.getItem("accessToken") } 
-    }).then((response) => {
-      setCategoryList(response.data);
-    });
+    axios
+      .get("http://localhost:3001/Categories", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setCategoryList(response.data);
+      });
 
-    axios.get("http://localhost:3001/Menu",
-    { headers: { accessToken: localStorage.getItem("accessToken") } 
-    }).then((response) => {
-      setMenuList(response.data);
-    });
+    axios
+      .get("http://localhost:3001/Menu", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setMenuList(response.data);
+      });
 
     // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
     //   setMenuList(response.data);
     // });
   }, []);
 
-
   const [userObject, setUserObject] = useState();
   const [buttonText, setButtonText] = useState();
-
 
   // const addorcancel= (id)=>{
 
   //   axios
   //   .get(`http://localhost:3001/fav/byId/${id}`,
-  //   { headers: { accessToken: localStorage.getItem("accessToken") } 
+  //   { headers: { accessToken: localStorage.getItem("accessToken") }
   //   })
   //   .then((response) => {
   //     setUserObject(response.data);
   //   });
-    
+
   //   if (userObject.MenuitemId==id){
-  //     setButtonText('cancel'); 
+  //     setButtonText('cancel');
   //   }else{
-  //     setButtonText('add to favorite'); 
+  //     setButtonText('add to favorite');
   //   }
 
   // }
 
   const favpost = (id) => {
-    axios
-      .post(
-        "http://localhost:3001/fav",
-        { MenuitemId: id },
-        { headers: { accessToken: localStorage.getItem("accessToken") } }
-      )}
+    axios.post(
+      "http://localhost:3001/fav",
+      { MenuitemId: id },
+      { headers: { accessToken: localStorage.getItem("accessToken") } }
+    );
+  };
 
-      const addToCart = (quantity, MenuitemId, price) => {
-        if (!localStorage.getItem("accessToken")) {
-          navigate("/login");
-        } else {
-          axios
-            .post(
-              "http://localhost:3001/cart",
-              {
-        
-                quantity: quantity,
-                MenuitemId: MenuitemId,
-                price: price,
-             
-              },
-              {
-                headers: {
-                  accessToken: localStorage.getItem("accessToken"),
-                },
-              }
-            )
-            .then((response) => {
-              if (response.data.error) {
-                console.log(response.data.error);
-              } else {
-                alert("Item Added To Cart");
-              }
-            });
-        }
-      };
-
-
-
+  const addToCart = (quantity, MenuitemId, price) => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+      axios
+        .post(
+          "http://localhost:3001/cart",
+          {
+            quantity: quantity,
+            MenuitemId: MenuitemId,
+            price: price,
+          },
+          {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            alert("Item Added To Cart");
+          }
+        });
+    }
+  };
 
   return (
     <div className="d-flex  container col-12 mb-5">
       <div className="col-3 mx-2">
         <table className="table table-hover" name="categories">
           <thead>
-          <tr>
-              <th className="flex-column col-1" onClick={() => {
-                        axios.get(`http://localhost:3001/menu`,
-                        { headers: { accessToken: localStorage.getItem("accessToken") } 
-                        }).then((response) => {
-                          setMenuList(response.data);
-                        });
-                  
-                        }}>All Categories</th>
+            <tr>
+              <th
+                className="flex-column col-1"
+                onClick={() => {
+                  axios
+                    .get(`http://localhost:3001/menu`, {
+                      headers: {
+                        accessToken: localStorage.getItem("accessToken"),
+                      },
+                    })
+                    .then((response) => {
+                      setMenuList(response.data);
+                    });
+                }}
+              >
+                All Categories
+              </th>
             </tr>
 
             {categoryList.map((value, key) => {
@@ -119,8 +123,10 @@ function Menu() {
                     className="col-6"
                     onClick={() => {
                       axios
-                        .get(`http://localhost:3001/menu/byId/${value.id}`,
-                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        .get(`http://localhost:3001/menu/byId/${value.id}`, {
+                          headers: {
+                            accessToken: localStorage.getItem("accessToken"),
+                          },
                         })
                         .then((response) => {
                           setMenuList(response.data);
@@ -142,53 +148,49 @@ function Menu() {
             return (
               <div className="col">
                 <div className="card h-100 ">
-                  <img src={value.photoURL} className="card-img-top" alt="..." />
+                  <img
+                    src={value.photoURL}
+                    className="card-img-top"
+                    alt="..."
+                  />
                   <div className="card-body ">
-                    <h5
-                      className="card-title"
-                     
-                    >
-                      {value.itemname}
-                    </h5>
+                    <h5 className="card-title">{value.itemname}</h5>
 
                     <p className="card-text">{value.description}</p>
                   </div>
-                  
+
                   <div className="row card-footer">
-                  <div className="col-6">
-                    <p className="text-muted ">${value.price}</p>
-                  </div>
-                      {/* <BookmarkAddIcon onClick={ ()=>{
+                    <div className="col-6">
+                      <p className="text-muted ">${value.price}</p>
+                    </div>
+                    {/* <BookmarkAddIcon onClick={ ()=>{
                           favpost(value.id);
                         } }/> */}
-                    <button  className="btn btn-sm  btn-outline-danger  col-3 "
-                        onClick={ ()=>{
-                          favpost(value.id);
-                     
-                        }
-                        
-                        }
-                        >fav
+                    <button
+                      className="btn btn-sm  btn-outline-danger  col-3 "
+                      onClick={() => {
+                        favpost(value.id);
+                      }}
+                    >
+                      fav
                     </button>
                     <button
-                      onClick={(e) =>
-                        addToCart( 1, value.id, value.price)
-                      }
+                      onClick={(e) => addToCart(1, value.id, value.price)}
                       className="btn btn-success btn-sm col-3"
                     >
                       Add to cart
                     </button>
                   </div>
-                  
-           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+                  <link
+                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                    rel="stylesheet"
+                  ></link>
                 </div>
               </div>
             );
           })}
-         
         </div>
-
-       
       </div>
     </div>
   );

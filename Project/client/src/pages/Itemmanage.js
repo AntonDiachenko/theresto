@@ -160,7 +160,8 @@ const updateCategory = (id)=>{
                   <th className="col-1 flex-column">itemname</th>
                   <th className="col-1 flex-column">description</th>
                   <th className="col-1 flex-column">price</th>
-                  <th className="col-2 flex-column">photoURL</th>
+                  <th className="col-3 flex-column">photoURL</th>
+                  <th className="col-3 flex-column">photo</th>
                 </tr>
 
                 {listOfMenuitems.map((value, key) => {
@@ -171,7 +172,8 @@ const updateCategory = (id)=>{
                       <td className="col-1">{value.itemname}</td>
                       <td className="col-1">{value.description}</td>
                       <td className="col-1">{value.price}</td>
-                      <td className="col-2">{value.photoURL}</td>
+                      <td className="col-3">{value.photoURL}</td>
+                      <td className="col-3"><img className="itemListImage" src={value.photoURL}></img></td>
                     </tr>
                   );
                 })}
