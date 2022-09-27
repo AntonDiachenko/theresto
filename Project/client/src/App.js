@@ -1,11 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import Home from "./pages/Home";
 import { useEffect, useState } from "react";
@@ -17,16 +11,14 @@ import Login from "./pages/Login";
 import Menu from "./pages/Menu";
 import Usermanage from "./pages/Usermanage";
 import Itemmanage from "./pages/Itemmanage";
-import Historymanage from "./pages/Historymanage";
-
+// import Historymanage from "./pages/Historymanage";
 import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import Userupdate from "./pages/Userupdate";
 import Addnewuser from "./pages/Addnewuser";
-
+import Newitem from "./pages/Newitem";
 import Profile from "./pages/Profile";
 import { SocialIcon } from "react-social-icons";
-
 import Item from "./pages/Item";
 
 function App() {
@@ -44,7 +36,6 @@ function App() {
     setAuthState({ username: "", id: 0, status: false, role: "" });
   };
 
-  const [user, setUser] = useState({});
   useEffect(() => {
     axios
       .get("http://localhost:3001/auth/auth", {
@@ -90,11 +81,11 @@ function App() {
                           <a class="nav-link">Menu</a>
                         </Link>
                       </li>
-                      <li className="nav-item top-nav-item">
+                      {/* <li className="nav-item top-nav-item">
                         <Link to="/contact">
-                          <a class="nav-link">Contact</a>
+                          <a class="nav-link" >Contact</a>
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item top-nav-item">
                         <Link to="/login">
                           <a class="nav-link">Login</a>
@@ -110,34 +101,37 @@ function App() {
                 ) : authState.role == "user" ? (
                   <>
                     {/* user */}
-                    <ul className="nav justify-content-center">
-                      <li className="nav-item top-nav-item">
-                        <Link to="/">
-                          <a class="nav-link"> Home Page</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/menu">
-                          <a class="nav-link">Menu</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/profile">
-                          <a class="nav-link">Profile</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/fav">
-                          <a class="nav-link">favorites</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item top-nav-item">
-                        <Link to="/cart">
-                          <a class="nav-link">Cart</a>
-                        </Link>
-                      </li>
-                      {/* <Link to="/profile"> Profile</Link> */}
-                    </ul>
+                    <div>
+                      <ul className="nav justify-content-center">
+                        <li className="nav-item top-nav-item">
+                          <Link to="/">
+                            <a class="nav-link"> Home Page</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/menu">
+                            <a class="nav-link">Menu</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/profile">
+                            <a class="nav-link">Profile</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/fav">
+                            <a class="nav-link">Favorite</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item top-nav-item">
+                          <Link to="/cart">
+                            <a class="nav-link">Cart</a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* <Link to="/profile"> Profile</Link> */}
                   </>
                 ) : (
                   <>
@@ -154,11 +148,11 @@ function App() {
                             <a class="nav-link">Menu</a>
                           </Link>
                         </li>
-                        <li className="nav-item top-nav-item">
+                        {/* <li className="nav-item top-nav-item">
                           <Link to="/contact">
                             <a class="nav-link">Contact</a>
                           </Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item top-nav-item">
                           <Link to="/usermanage">
                             <a class="nav-link">UserManage</a>
@@ -169,29 +163,30 @@ function App() {
                             <a class="nav-link">ItemManage</a>
                           </Link>
                         </li>
-                        <li className="nav-item top-nav-item">
+                        {/* <li className="nav-item top-nav-item">
                           <Link to="/historymanage">
                             <a class="nav-link">HistoryManage</a>
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
-                    </div>
-                    <div className="welcome-container">
-                      <div>
-                        <h4><span id="welcome">Welcome</span> {authState.username}</h4>
-                      </div>      
-                      <div className="logout-btn-container">
-                        {authState.status && (
-                          <button className="login-button" onClick={logout}>
-                            {" "}
-                            Logout
-                          </button>
-                        )}                        
-                      </div>                  
-
                     </div>
                   </>
                 )}
+                <div className="welcome-container">
+                  <div>
+                    <h4>
+                      <span id="welcome">Welcome</span> {authState.username}
+                    </h4>
+                  </div>
+                  <div className="logout-btn-container">
+                    {authState.status && (
+                      <button className="login-button" onClick={logout}>
+                        {" "}
+                        Logout
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -202,13 +197,14 @@ function App() {
               <Route path="/menu" element={<Menu />} />
               <Route path="/usermanage" element={<Usermanage />} />
               <Route path="/itemmanage" element={<Itemmanage />} />
-              <Route path="/historymanage" element={<Historymanage />} />
+              {/* <Route path="/historymanage" element={<Historymanage />} /> */}
               <Route path="/Profile" element={<Profile />} />
               <Route path="/fav" element={<Favorites />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/update/:id" element={<Userupdate />} />
               <Route path="/newuser" element={<Addnewuser />} />
               <Route path="/menu/:id" element={<Item />} />
+              <Route path="/newitem" element={<Newitem />} />
             </Routes>
           </div>
 

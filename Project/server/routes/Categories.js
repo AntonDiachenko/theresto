@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
   res.json(categoryItem);
 });
 
-
 router.delete("/delete/:id", validateToken, async (req, res) => {
   const id = req.params.id;
   await Categories.destroy({
@@ -25,10 +24,16 @@ router.delete("/delete/:id", validateToken, async (req, res) => {
   res.json("delete");
 });
 
-//   router.get("/byId/:id", async (req, res) => {
-//     const id = req.params.id;
-//     const catItem = await Categories.findByPk(id);
-//     res.json(catItem);
-//   });
+router.put("/update/:id", validateToken, async (req, res) => {
+  const categoryid = req.params.id;
+  const category = req.body;
+  await Categories.update(
+    {
+      name: category.name,
+    },
+    { where: { id: categoryid } }
+  );
+  res.json(req.body);
+});
 
 module.exports = router;

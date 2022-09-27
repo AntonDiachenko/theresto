@@ -93,7 +93,6 @@ function Registration() {
               />
               <br></br>
             </div>
-            
 
             <button type="submit" className="login-button">
               Register

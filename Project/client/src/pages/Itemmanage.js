@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 // add hover to table, and overdisplay
 function Itemmanage() {
-  const { id } = useParams();
   const [name, setName] = useState("");
   const [listOfMenuitems, setListOfMenuitems] = useState([]);
   const [listOfCategories, setListOfCategories] = useState([]);
@@ -16,25 +15,39 @@ function Itemmanage() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/menu`).then((response) => {
-        setListOfMenuitems(response.data);
-      });
+      axios
+        .get(`http://localhost:3001/menu`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          setListOfMenuitems(response.data);
+        });
     }
 
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/category`).then((response) => {
-        setListOfCategories(response.data);
-      });
+      axios
+        .get(`http://localhost:3001/categories`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          setListOfCategories(response.data);
+        });
     }
   }, []);
 
   const NewCategory = () => {
     axios
-      .post("http://localhost:3001/category", {
-        name: name,
-      })
+      .post(
+        "http://localhost:3001/categories",
+        {
+          name: name,
+        },
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
       .then(() => {
         navigate(0);
       });
@@ -45,7 +58,7 @@ function Itemmanage() {
       navigate("/login");
     } else {
       axios
-        .delete(`http://localhost:3001/category/delete/${id}`, {
+        .delete(`http://localhost:3001/categories/delete/${id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -54,13 +67,48 @@ function Itemmanage() {
     }
   };
 
+  const updateCategory = (id) => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+      axios
+        .put(
+          `http://localhost:3001/categories/update/${id}`,
+          {
+            name: name,
+          },
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        )
+        .then((response) => {
+          navigate(0);
+        });
+    }
+  };
+
   return (
-    <div class="d-flex  container col-12 mt-5">
+    <div class="d-flex  container col-12 mb-5">
       <div class="col-3 mx-5">
         <table class="table table-hover" name="categories">
           <thead>
             <tr>
-              <th className="flex-column col-1">Categories</th>
+              <th
+                className="flex-column col-1"
+                onClick={() => {
+                  axios
+                    .get(`http://localhost:3001/menu`, {
+                      headers: {
+                        accessToken: localStorage.getItem("accessToken"),
+                      },
+                    })
+                    .then((response) => {
+                      setListOfMenuitems(response.data);
+                    });
+                }}
+              >
+                All Categories
+              </th>
             </tr>
 
             {listOfCategories.map((value, key) => {
@@ -70,13 +118,17 @@ function Itemmanage() {
                     className="col-6"
                     onClick={() => {
                       axios
-                        .get(`http://localhost:3001/menu/byId/${value.id}`)
+                        .get(`http://localhost:3001/menu/byId/${value.id}`, {
+                          headers: {
+                            accessToken: localStorage.getItem("accessToken"),
+                          },
+                        })
                         .then((response) => {
                           setListOfMenuitems(response.data);
                         });
                     }}
                   >
-                    <a>{value.name}</a>
+                    {value.name}
                   </td>
                   <button
                     className="btn btn-sm  btn-outline-danger col-6"
@@ -88,7 +140,9 @@ function Itemmanage() {
                   </button>
                   <button
                     className="btn btn-sm  btn-outline-danger col-6"
-                    onClick={() => {}}
+                    onClick={() => {
+                      updateCategory(value.id);
+                    }}
                   >
                     update
                   </button>
@@ -97,21 +151,20 @@ function Itemmanage() {
             })}
 
             <tr>
-              <div className="row">
-                <td className="col">
-                  <input
-                    className="col"
-                    type="text"
-                    name="name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    placeholder="New Category+"
-                  ></input>
-                </td>
+              <div className="row  ">
+                <input
+                  className="col-6"
+                  type="text"
+                  name="name"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  placeholder="New Category+"
+                ></input>
+
                 <button
                   type="submit"
-                  className="btn btn-sm btn-secondary col-4 "
+                  className="btn btn-sm btn-secondary col-6"
                   onClick={NewCategory}
                 >
                   New
@@ -124,7 +177,20 @@ function Itemmanage() {
 
       <div class="col-9 mx-5">
         <div className="row pre-scrollable">
-          <h2 className="col">Item List:</h2>
+          <h2
+            className="col"
+            onClick={() => {
+              axios
+                .get(`http://localhost:3001/menu`, {
+                  headers: { accessToken: localStorage.getItem("accessToken") },
+                })
+                .then((response) => {
+                  setListOfMenuitems(response.data);
+                });
+            }}
+          >
+            Item List:
+          </h2>
           <button
             className="btn btn-sm  btn-outline-danger  col-2"
             onClick={() => {
@@ -138,6 +204,7 @@ function Itemmanage() {
         <table class="table table-hover col-9" name="menuitems">
           <thead>
             <tr>
+              <th className="col-1 flex-column">itemname</th>
               <th className="col-1 flex-column">description</th>
               <th className="col-1 flex-column">price</th>
               <th className="col-2 flex-column">photoURL</th>
@@ -150,6 +217,7 @@ function Itemmanage() {
                     navigate(`/menu/${value.id}`);
                   }}
                 >
+                  <td className="col-1">{value.itemname}</td>
                   <td className="col-1">{value.description}</td>
                   <td className="col-1">{value.price}</td>
                   <td className="col-2">{value.photoURL}</td>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -10,8 +9,6 @@ function Userupdate() {
   let { id } = useParams();
   const navigate = useNavigate();
   const [userObject, setUserObject] = useState([]);
-
-  // setUserObject({ username: "", email: "", phone: "", role: "" });
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -34,27 +31,16 @@ function Userupdate() {
     }
   }, []);
 
-  // const initialValues = {
-  //     username: "",
-  //     email:"",
-  //     phone:"",
-  //     role:"user"
-  // };
-
   const update = (data) => {
     axios
-      .put(`http://localhost:3001/auth/update/${id}`, data)
+      .put(`http://localhost:3001/auth/update/${id}`, data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
       .then((response) => {
         navigate("/usermanage");
       });
   };
 
-  //   const validationSchema= Yup.object().shape({
-  //     username:Yup.string().min(3).max(15).required(),
-  //     email:Yup.string().email().required(),
-  //     phone:Yup.string().required(),
-  //     role:Yup.string().oneOf(['admin','user'])
-  // });
   const [userName, setUserName] = useState([]);
   const [email, setEmail] = useState([]);
   const [phone, setPhone] = useState([]);
