@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root2022root2022",
+    "password": "root2022",
     "database": "aproject",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -21,5 +21,3 @@
     "dialect": "mysql"
   }
 }
-
-
