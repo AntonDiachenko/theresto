@@ -45,17 +45,7 @@ function Profile() {
                         <span class="input-group-text col-3  ">Phone:</span> 
                         <div className="form-control col text-break ">{userObject.phone}</div>      
                     </div>
-    
-            {/* {authState.username === username && (
-            <button
-                onClick={() => {
-                navigate("/changepassword");
-                }}
-            >
-                {" "}
-                Change My Password
-            </button>
-            )} */}
+
         </div>
         <div className="listOfFav">
             <h1>User's favorites:</h1>
@@ -65,7 +55,7 @@ function Profile() {
                         <div className="col mb-3">
                             <div className="d-flex row row-cols-2 h-400 col-12">
                                     <div className=" col-5 h-400">
-                                        <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D" />
+                                        <img src={value.photoURL} />
                                     </div>
                                     <div className=" col-7 h-400">
                                         <h5 className="mb-3 display-6" > Itemname : {value.itemname} </h5>
