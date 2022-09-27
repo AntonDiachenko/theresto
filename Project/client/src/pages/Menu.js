@@ -36,29 +36,31 @@ function Menu() {
 
 
 
-  const isFavority=(isfav)=>{ 
-        if (isfav===1) {
-          return "cancel";
-        } else {
-          return "fav"
-        }
-  }
+  const isFavority = (isfav) => {
+    if (isfav === 1) {
+      return "cancel";
+    } else {
+      return "fav";
+    }
+  };
 
-  const isCart=(isCart)=>{
-    if (isCart===1) {
+  const isCart = (isCart) => {
+    if (isCart === 1) {
       return "del";
     } else {
-      return "add"
+      return "add";
     }
-}
+  };
+
+ 
 
   const favpost = (id) => {
-    axios
-      .post(
-        "http://localhost:3001/fav",
-        { MenuitemId: id },
-        { headers: { accessToken: localStorage.getItem("accessToken") } }
-      )}
+    axios.post(
+      "http://localhost:3001/fav",
+      { MenuitemId: id },
+      { headers: { accessToken: localStorage.getItem("accessToken") } }
+    );
+  };
 
   const addToCart = (quantity, MenuitemId, price) => {
     if (!localStorage.getItem("accessToken")) {
@@ -68,11 +70,9 @@ function Menu() {
         .post(
           "http://localhost:3001/cart",
           {
-    
             quantity: quantity,
             MenuitemId: MenuitemId,
             price: price,
-          
           },
           {
             headers: {
@@ -90,12 +90,9 @@ function Menu() {
     }
   };
 
-
-
-
   return (
-    <div className="d-flex  container col-12 mb-5">
-      <div className="col-3 mx-2">
+    <div className="d-flex  container col-12 my-5">
+      <div className="col-3 px-3">
         <table className="table table-hover" name="categories">
           <thead>
             <tr>
@@ -122,7 +119,7 @@ function Menu() {
               return (
                 <tr>
                   <td
-                    className="col-6 menu-item-hover"
+                    className="menu-item-hover"
                     onClick={() => {
                       if (!localStorage.getItem("accessToken")) {
                       axios.get(`http://localhost:3001/menu/byId/${value.id}`
@@ -151,8 +148,8 @@ function Menu() {
         </table>
       </div>
 
-      <div className="col-10 mx-5">
-        <div className="row row-cols-1 row-cols-md-4 g-4">
+      <div className="col-9 px-3">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
           {menuList.map((value, key) => {
             return (
               <div className="col">
@@ -182,11 +179,10 @@ function Menu() {
                         >{isFavority(value.isFav)}
                     </button>
                     <button
-                      onClick={()=>{
-                        addToCart( 1, value.id, value.price);
+                      onClick={() => {
+                        addToCart(1, value.id, value.price);
                         navigate(0);
-                      } 
-                      }
+                      }}
                       className="btn btn-success btn-sm col-3"
                     >
                       {isCart(value.isCart)}

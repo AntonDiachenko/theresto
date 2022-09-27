@@ -21,17 +21,17 @@ module.exports = (sequelize, Datatypes) => {
 
   // NEEDS USERID FK
 
-  // Orders.associate =(models)=>{
-  //     Orders.hasMany(models.Orderitems,{
-  //         onDelete:"cascade",
-  //     })
-  // }
+  Orders.associate =(models)=>{
+      Orders.hasMany(models.Orderitems,{
+          onDelete:"cascade",
+      })
+  }
 
-  // Orders.associate =(models)=>{
-  //     Orders.hasOne(models.Payments,{
-  //         onDelete:"no action",
-  //     })
-  // }
+  Orders.associate =(models)=>{
+      Orders.hasOne(models.Payments,{
+          onDelete:"no action",
+      })
+  }
 
   return Orders;
 };

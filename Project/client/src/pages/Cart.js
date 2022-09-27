@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../Stripe.css";
+import StripeContainer from "./StripeContainer";
 // import { AuthContext } from "../helpers/AuthContext";
 
 function Cart() {
@@ -8,21 +10,36 @@ function Cart() {
   const [count, setCount] = useState(0);
   const [cartList, setCartList] = useState([]);
   const [jsonObject, setJsonObject] = useState(0);
-  var sum = 0;
-  var tax = 0;
-  var Total = 0;
+  const [showItem, setShowItem] = useState(false);
 
+  var sum = 0.0;
+  var tax = 0.0;
+  var Total = 0.0;
 
-const multiple=(a,b)=>{
-  const itemTotal = a * b;
+  // getTotals(state, action) {
+  //   let { total, quantity } = state.cartItems.reduce(
+  //     (cartTotal, cartItem) => {
+  //       const { price, cartQuantity } = cartItem;
+  //       const itemTotal = price * cartQuantity;
 
-  sum = sum + itemTotal;
-  tax = sum*0.15;
-  Total = sum+tax;
-  return itemTotal;
-}
-  
+  //       cartTotal.total += itemTotal;
+  //       cartTotal.quantity += cartQuantity;
 
+  //       return cartTotal;
+  //     },
+  //     {
+  //       total: 0,
+  //       quantity: 0,
+  //     }
+  //   );
+  const multiple = (a, b) => {
+    const itemTotal = a * b;
+
+    sum = sum + itemTotal;
+    tax = sum * 0.15;
+    Total = sum + tax;
+    return itemTotal;
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -38,78 +55,75 @@ const multiple=(a,b)=>{
     }
   }, []);
 
-  // const updatequantity = (id, quantity) => {
-  //   axios
-  //     .put(
-  //       `http://localhost:3001/cart/update`,
-  //       {
-  //         MenuitemId: id,
-  //         quantity: quantity + 1,
-  //       },
-  //       { headers: { accessToken: localStorage.getItem("accessToken") } }
-  //     )
-  //     .then((response) => {
-  //       navigate(0);
-  //     });
-  // };
-
-  const increase =(id,quantity) => {
-    quantity=quantity+1;
-    axios.put(`http://localhost:3001/cart/update`,{
-      MenuitemId:id,
-      quantity:quantity
-    },
-    { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
-     navigate(0);
-   
-    });
-  }
-
-  const reduce =(id,quantity) => {
-    quantity=quantity-1;
-    if (quantity>0) {
-      axios.put(`http://localhost:3001/cart/update`,{
-        MenuitemId:id,
-        quantity:quantity
-      },
-      { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
-       
+  const increase = (id, quantity) => {
+    quantity = quantity + 1;
+    axios
+      .put(
+        `http://localhost:3001/cart/update`,
+        {
+          MenuitemId: id,
+          quantity: quantity,
+        },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )
+      .then((response) => {
         navigate(0);
       });
+  };
+
+  const reduce = (id, quantity) => {
+    quantity = quantity - 1;
+    if (quantity > 0) {
+      axios
+        .put(
+          `http://localhost:3001/cart/update`,
+          {
+            MenuitemId: id,
+            quantity: quantity,
+          },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        )
+        .then((response) => {
+          navigate(0);
+        });
     } else {
-      axios.delete(
-        `http://localhost:3001/cart/delete/${id}`,
-        
-        { headers: { accessToken: localStorage.getItem("accessToken") } }
-      ).then((response)=>{
-        navigate(0);
+      axios
+        .delete(
+          `http://localhost:3001/cart/delete/${id}`,
+
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        )
+        .then((response) => {
+          navigate(0);
         });
     }
-    
-  }
+  };
 
-  const clear =()=>{
-    axios.delete(
-      `http://localhost:3001/cart/delete`,
-      
-      { headers: { accessToken: localStorage.getItem("accessToken") } }
-    ).then((response)=>{
-      navigate(0);
+  const clear = () => {
+    axios
+      .delete(
+        `http://localhost:3001/cart/delete`,
+
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )
+      .then((response) => {
+        navigate(0);
       });
-  }
-
+  };
 
   return (
     <div>
       <div class=" container col  mb-5">
         <div className="row d-flex row-clo-2">
           <h2 className="col-8">Cart List:</h2>
-          <button 
-          className="col-2 crud-button"
-          onClick={()=>{
-                          clear();
-                        }} 
-          >Clear All</button>
+          <button
+            className="col-2 crud-button"
+            onClick={() => {
+              clear();
+            }}
+          >
+            Clear All
+          </button>
         </div>
 
         <table class="table table-striped">
@@ -157,7 +171,7 @@ const multiple=(a,b)=>{
             
             // 3个问题，1 数量，2数量改变subtotal跟着改变，3确定提交order
               );
-            })};
+            })}
             <tr>
               <td>{}</td>
               <td>{}</td>
@@ -176,9 +190,25 @@ const multiple=(a,b)=>{
               <td>Total:</td>
               <td>$ {Total}</td>
             </tr>
-
           </thead>
         </table>
+        <div className="App2">
+          <h1>Complete Payment</h1>
+          {showItem ? (
+            <StripeContainer />
+          ) : (
+            <>
+              <h3>Are you ready to order?</h3>
+
+              <button
+                className="buttonStripe2"
+                onClick={() => setShowItem(true)}
+              >
+                Purchase Order
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

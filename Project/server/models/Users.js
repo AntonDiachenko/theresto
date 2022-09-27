@@ -54,17 +54,14 @@ module.exports = (sequelize, Datatypes) => {
   //     })
   // }
 
+  Users.associate = (models) => {
+    Users.hasMany(models.Favorites, {
+      onDelete: "cascade",
+    });
+    Users.hasMany(models.Cartitems, {
+      onDelete: "cascade",
+    });
+  };
 
-    Users.associate =(models)=>{
-        Users.hasMany(models.Favorites,{
-            onDelete:"cascade",
-        });
-        Users.hasMany(models.Cartitems,{
-            onDelete:"cascade",
-        })
-    }
-
-
-
-    return Users;
-}
+  return Users;
+};

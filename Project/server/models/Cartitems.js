@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, Datatypes) => {
   const Cartitems = sequelize.define("Cartitems", {
     quantity: {

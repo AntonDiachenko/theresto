@@ -10,8 +10,6 @@ function Userupdate() {
   const navigate = useNavigate();
   const [userObject, setUserObject] = useState([]);
 
-
-
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
@@ -35,8 +33,9 @@ function Userupdate() {
 
   const update = (data) => {
     axios
-      .put(`http://localhost:3001/auth/update/${id}`, data,
-      { headers: { accessToken: localStorage.getItem("accessToken") } })
+      .put(`http://localhost:3001/auth/update/${id}`, data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
       .then((response) => {
         navigate("/usermanage");
       });
