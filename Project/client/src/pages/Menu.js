@@ -91,7 +91,7 @@ function Menu() {
   };
 
   return (
-    <div className="d-flex  container col-12 mb-5">
+    <div className="d-flex  container col-12 mb-5 my-5">
       <div className="col-3 mx-2">
         <table className="table table-hover" name="categories">
           <thead>
