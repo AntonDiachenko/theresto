@@ -93,13 +93,13 @@ function Menu() {
   };
 
   return (
-    <div className="d-flex  container col-12 mb-5">
-      <div className="col-3 mx-2">
+    <div className="d-flex  container col-12 my-5">
+      <div className="col-3 px-3">
         <table className="table table-hover" name="categories">
           <thead>
             <tr>
               <th
-                className="flex-column col-1"
+                className="flex-column col-1 menu-item-hover"
                 onClick={() => {
                   axios
                     .get(`http://localhost:3001/menu`, {
@@ -120,7 +120,7 @@ function Menu() {
               return (
                 <tr>
                   <td
-                    className="col-6"
+                    className="menu-item-hover"
                     onClick={() => {
                       axios
                         .get(`http://localhost:3001/menu/byId/${value.id}`, {
@@ -142,8 +142,8 @@ function Menu() {
         </table>
       </div>
 
-      <div className="col-10 mx-5">
-        <div className="row row-cols-1 row-cols-md-4 g-4">
+      <div className="col-9 px-3">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
           {menuList.map((value, key) => {
             return (
               <div className="col">
@@ -159,10 +159,8 @@ function Menu() {
                     <p className="card-text">{value.description}</p>
                   </div>
 
-                  <div className="row card-footer">
-                    <div className="col-6">
-                      <p className="text-muted ">${value.price}</p>
-                    </div>
+                  <div className="card-footer">
+                    <p className="text-muted ">${value.price}</p>
                     {/* <BookmarkAddIcon onClick={ ()=>{
                           favpost(value.id);
                         } }/> */}

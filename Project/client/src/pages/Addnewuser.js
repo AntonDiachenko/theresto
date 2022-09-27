@@ -33,8 +33,8 @@ function Addnewuser() {
   });
 
   return (
-    <div>
-      <div className="container col-6">
+    <div className="login-container">
+      <div className="formContainer">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}

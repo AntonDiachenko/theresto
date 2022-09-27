@@ -104,7 +104,7 @@ function Cart() {
 
   return (
     <div>
-      <div class=" container col  mb-5">
+      <div class=" container col  my-5">
         <div className="row">
           <h2 className="col">Cart List:</h2>
         </div>
@@ -169,7 +169,7 @@ function Cart() {
 
 
               );
-            })};
+            })}
             <tr>
               <td>{}</td>
               <td>{}</td>

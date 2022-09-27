@@ -29,7 +29,7 @@ function Favorites() {
         { MenuitemId: id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )}
-  const addToCart = (quantity, itemname, price) => {
+  const addToCart = (quantity, itemname, price, MenuitemId) => {
         if (!localStorage.getItem("accessToken")) {
           navigate("/login");
         } else {
@@ -41,6 +41,7 @@ function Favorites() {
                 quantity: quantity,
                 itemname: itemname,
                 price: price,
+                MenuitemId: MenuitemId
              
               },
               {
@@ -60,7 +61,7 @@ function Favorites() {
       };
 
   return (
-    <div className="col-10 mx-5 ">
+    <div className="col-10 my-5 mx-5  ">
         <div className="row  g-2  row-cols-md-4 ">
           {menuList.map((value, key) => {
             return (
@@ -92,7 +93,7 @@ function Favorites() {
                                 >cancel</button>
                           <button
                             onClick={(e) =>
-                              addToCart( 1, value.itemname, value.price)
+                              addToCart( 1, value.itemname, value.price, value.MenuitemId)
                             }
                             className="btn btn-success btn-sm col-3"
                           >

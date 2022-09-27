@@ -50,11 +50,11 @@ Menuitems.associate =(models)=>{
   
 
 
-  // Menuitems.associate =(models)=>{
-  //     Menuitems.hasMany(models.Orderitems,{
-  //         onDelete:"cascade",
-  //     })
-  // }
+  Menuitems.associate =(models)=>{
+      Menuitems.hasMany(models.Orderitems,{
+          onDelete:"cascade",
+      })
+  }
 
   return Menuitems;
 };
