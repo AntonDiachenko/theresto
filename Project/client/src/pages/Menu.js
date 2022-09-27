@@ -107,34 +107,26 @@ function Menu() {
   };
 
   return (
-    <div className="d-flex  container col-12 my-5">
-      <div className="col-3 px-3">
+    <div className="d-flex  container col-12 mb-5">
+      <div className="col-3 mx-2">
         <table className="table table-hover" name="categories">
           <thead>
-            <tr>
-              <th
-                className="flex-column col-1 menu-item-hover"
-                onClick={() => {
-                  axios
-                    .get(`http://localhost:3001/menu`, {
-                      headers: {
-                        accessToken: localStorage.getItem("accessToken"),
-                      },
-                    })
-                    .then((response) => {
-                      setMenuList(response.data);
-                    });
-                }}
-              >
-                All Categories
-              </th>
+          <tr>
+              <th className="flex-column col-1 menu-item-hover" onClick={() => {
+                        axios.get(`http://localhost:3001/menu/mandf`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        }).then((response) => {
+                          setMenuList(response.data);
+                        });
+                  
+                        }}>All Categories</th>
             </tr>
 
             {categoryList.map((value, key) => {
               return (
                 <tr>
                   <td
-                    className="menu-item-hover"
+                    className="col-6 menu-item-hover"
                     onClick={() => {
                       axios
                         .get(`http://localhost:3001/menu/mandf/${value.id}`,
@@ -155,8 +147,8 @@ function Menu() {
         </table>
       </div>
 
-      <div className="col-9 px-3">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
+      <div className="col-10 mx-5">
+        <div className="row row-cols-1 row-cols-md-4 g-4">
           {menuList.map((value, key) => {
             return (
               <div className="col">
@@ -172,8 +164,10 @@ function Menu() {
                     <p className="card-text">{value.description}</p>
                   </div>
 
-                  <div className="card-footer">
-                    <p className="text-muted ">${value.price}</p>
+                  <div className="row card-footer">
+                    <div className="col-6">
+                      <p className="text-muted ">${value.price}</p>
+                    </div>
                     {/* <BookmarkAddIcon onClick={ ()=>{
                           favpost(value.id);
                         } }/> */}

@@ -548,5 +548,24 @@ height: 120px;
   height: auto;
 }
 
+/* ---------Item Manage---------*/
+.basicInfo {
+  width: 400px;
+  margin: 0 auto;
+}
 
+.listOfFavs{
+  margin: 0 auto;
+  max-width: 1000px;
+}
 
+.profileFavPics {
+  margin: 5px 5px 5px 5px;
+  width: 150px;
+  height: auto;
+}
+
+.paymentSum {
+  font-size: 18px;
+  font-weight: bold;
+}

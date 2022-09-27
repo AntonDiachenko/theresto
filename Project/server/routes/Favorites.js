@@ -24,7 +24,7 @@ router.post("/", validateToken, async (req, res) => {
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "root2022",
+  password: "root2022root2022",
   database: "aproject",
 });
 

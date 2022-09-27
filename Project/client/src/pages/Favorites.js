@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function Favorites() {
   const navigate = useNavigate();
@@ -64,9 +64,8 @@ function Favorites() {
     }
   };
 
-
   return (
-    <div className="col-10 mx-5 ">
+    <div className="container mx-5 my-5 ">
       <div className="row  g-2  row-cols-md-4 ">
         {menuList.map((value, key) => {
           return (

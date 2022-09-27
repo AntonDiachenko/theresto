@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Profile() {
- 
-
   const [userObject, setUserObject] = useState("");
   const [listOfFav, setListOfFav] = useState([]);
   // const { authState } = useContext(AuthContext);
@@ -28,9 +26,10 @@ function Profile() {
   }, []);
 
   return (
-    <div className="container col-6">
+    <div className="container my-5">
       <div className="basicInfo">
-        <h1> Username: {userObject.username} </h1>
+        <h3> Username: {userObject.username} </h3>
+        <br></br>
         <div className="input-group mb-1">
           <span class="input-group-text col-3">UserId:</span>
           <div className="form-control col">{userObject.id}</div>
@@ -59,35 +58,31 @@ function Profile() {
             </button>
             )} */}
       </div>
-      <div className="listOfFav">
-        <h1>User's favorites:</h1>
-        <div className="">
-          {listOfFav.map((value, key) => {
-            return (
-              <div className="col mb-3">
-                <div className="d-flex row row-cols-2 h-400 col-12">
-                  <div className=" col-5 h-400">
-                    <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D" />
-                  </div>
-                  <div className=" col-7 h-400">
-                    <h5 className="mb-3 display-6">
-                      {" "}
-                      Itemname : {value.itemname}{" "}
-                    </h5>
-                    <div className="mb-3 display-6">
-                      {" "}
-                      Item Description : {value.description}
-                    </div>
-                    <div className="mb-3 display-6">
-                      {" "}
-                      Item Price : {value.price}
-                    </div>
-                  </div>
+
+      <div className="listOfFavs my-5">
+        <h3>User's Favorites:</h3>
+        <br></br>
+
+        {listOfFav.map((value, key) => {
+          return (
+            <div className="d-flex row row-cols-2 h-400 col-12">
+              <div className="col-4">
+                <img className="profileFavPics" src={value.photoURL} />
+              </div>
+              <div className=" col-8 h-400">
+                <div className="mb-3 display-6">
+                  <h5> Itemname : {value.itemname} </h5>
+                </div>
+                <div className="mb-3 display-6">
+                  <h5> Item Description : {value.description}</h5>
+                </div>
+                <div className="mb-3 display-6">
+                  <h5> Item Price : $ {value.price}</h5>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

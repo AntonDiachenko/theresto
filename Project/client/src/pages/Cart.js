@@ -113,7 +113,7 @@ function Cart() {
 
   return (
     <div>
-      <div class=" container col  mb-5">
+      <div class=" container col my-5 mb-5">
         <div className="row d-flex row-clo-2">
           <h2 className="col-8">Cart List:</h2>
           <button
@@ -173,25 +173,27 @@ function Cart() {
               );
             })}
             <tr>
+              <td >{}</td>
               <td>{}</td>
-              <td>{}</td>
-              <td>Sum:</td>
-              <td>$ {sum}</td>
+              <td className="paymentSum">Sum:</td>
+              <td className="paymentSum">$ {parseFloat(sum).toFixed(2)}</td>
             </tr>
             <tr>
               <td>{}</td>
               <td>{}</td>
-              <td>Tax:</td>
-              <td>$ {tax}</td>
+              <td className="paymentSum">Tax:</td>
+              <td className="paymentSum">$ {parseFloat(tax).toFixed(2)}</td>
             </tr>
             <tr>
               <td>{}</td>
               <td>{}</td>
-              <td>Total:</td>
-              <td>$ {Total}</td>
+              <td className="paymentSum">Total:</td>
+              <td className="paymentSum">$ {parseFloat(Total).toFixed(2)}</td>
+
             </tr>
           </thead>
         </table>
+        <br></br>
         <div className="App2">
           <h1>Complete Payment</h1>
           {showItem ? (

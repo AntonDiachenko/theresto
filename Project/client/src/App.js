@@ -120,7 +120,7 @@ function App() {
                         </li>
                         <li className="nav-item top-nav-item">
                           <Link to="/fav">
-                            <a class="nav-link">Favorite</a>
+                            <a class="nav-link">Favorites</a>
                           </Link>
                         </li>
                         <li className="nav-item top-nav-item">
@@ -170,12 +170,12 @@ function App() {
                         </li> */}
                         <li className="nav-item top-nav-item">
                           <Link to="/usermanage">
-                            <a class="nav-link">UserManage</a>
+                            <a class="nav-link">Manage User</a>
                           </Link>
                         </li>
                         <li className="nav-item top-nav-item">
                           <Link to="/itemmanage">
-                            <a class="nav-link">ItemManage</a>
+                            <a class="nav-link">Manage Item</a>
                           </Link>
                         </li>
                         {/* <li className="nav-item top-nav-item">
@@ -242,11 +242,6 @@ function App() {
                     </Link>
                   </li>
                   <li class="nav-item mb-2 footer-nav-item">
-                    <Link to="/contact">
-                      <a class="nav-link p-0 text-muted">Contact</a>
-                    </Link>
-                  </li>
-                  <li class="nav-item mb-2 footer-nav-item">
                     <Link to="/registration">
                       <a class="nav-link p-0 text-muted">Registration</a>
                     </Link>
@@ -259,38 +254,7 @@ function App() {
                 </ul>
               </div>
 
-              <div class="col mb-3">
-                <h5>Other</h5>
-                <ul class="nav flex-column">
-                  <li class="nav-item mb-2 footer-nav-item">
-                    <a href="#" class="nav-link p-0 text-muted">
-                      Home
-                    </a>
-                  </li>
-                  <li class="nav-item mb-2 footer-nav-item">
-                    <a href="#" class="nav-link p-0 text-muted">
-                      Features
-                    </a>
-                  </li>
-                  <li class="nav-item mb-2 footer-nav-item">
-                    <a href="#" class="nav-link p-0 text-muted">
-                      Pricing
-                    </a>
-                  </li>
-                  <li class="nav-item mb-2 footer-nav-item">
-                    <a href="#" class="nav-link p-0 text-muted">
-                      FAQs
-                    </a>
-                  </li>
-                  <li class="nav-item mb-2 footer-nav-item">
-                    <a href="#" class="nav-link p-0 text-muted">
-                      About
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="col mb-3">
+               <div class="col mb-3">
                 <h5>Contact Us</h5>
                 <span>
                   <SocialIcon url="https://facebook.com" />{" "}
