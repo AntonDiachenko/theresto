@@ -24,13 +24,14 @@ router.post("/", validateToken, async (req, res) => {
   }); 
 
   
-// get users by userid
   const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "root2022root2022",
-  database: "aproject",
-  });
+    host: "localhost",
+    user: "root",
+    password: "root2022",
+    database: "aproject",
+    });
+  
+    
 
   
   router.get("/byUserId", validateToken, async (req, res) => {

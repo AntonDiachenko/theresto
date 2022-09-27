@@ -3,7 +3,7 @@ const router = express.Router();
 const { Categories } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/", validateToken, async (req, res) => {
+router.get("/",  async (req, res) => {
   const categoryList = await Categories.findAll();
   res.json(categoryList);
 });

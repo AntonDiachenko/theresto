@@ -3,8 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
 
 function Menu() {
   const { id } = useParams();
@@ -15,41 +14,27 @@ function Menu() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/Categories", {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
+      .get("http://localhost:3001/Categories"
+      )
       .then((response) => {
         setCategoryList(response.data);
       });
-
+      if (!localStorage.getItem("accessToken")) {
+        axios.get("http://localhost:3001/Menu").then((response) => {
+          setMenuList(response.data);
+        });
+    }
+    else {
     axios.get("http://localhost:3001/Menu/mandf",
     { headers: { accessToken: localStorage.getItem("accessToken") } 
-    }).then((response) => {
+    }
+    ).then((response) => {
       setMenuList(response.data);
     });
-
+}
   }, []);
 
-  const [userObject, setUserObject] = useState();
-  const [buttonText, setButtonText] = useState();
 
-  // const addorcancel= (id)=>{
-
-  //   axios
-  //   .get(`http://localhost:3001/fav/byId/${id}`,
-  //   { headers: { accessToken: localStorage.getItem("accessToken") }
-  //   })
-  //   .then((response) => {
-  //     setUserObject(response.data);
-  //   });
-
-  //   if (userObject.MenuitemId==id){
-  //     setButtonText('cancel');
-  //   }else{
-  //     setButtonText('add to favorite');
-  //   }
-
-  // }
 
   const isFavority=(isfav)=>{ 
         if (isfav===1) {
@@ -113,15 +98,24 @@ function Menu() {
       <div className="col-3 mx-2">
         <table className="table table-hover" name="categories">
           <thead>
-          <tr>
-              <th className="flex-column col-1 menu-item-hover" onClick={() => {
-                        axios.get(`http://localhost:3001/menu/mandf`,
-                        { headers: { accessToken: localStorage.getItem("accessToken") } 
-                        }).then((response) => {
-                          setMenuList(response.data);
-                        });
-                  
-                        }}>All Categories</th>
+            <tr>
+              <th className="flex-column col-1 menu-item-hover" 
+              onClick={() => {
+                if (!localStorage.getItem("accessToken")) {
+                  axios.get("http://localhost:3001/Menu").then((response) => {
+                    setMenuList(response.data);
+                  });
+              }
+              else {
+              axios.get("http://localhost:3001/Menu/mandf",
+              { headers: { accessToken: localStorage.getItem("accessToken") } 
+              }
+              ).then((response) => {
+                setMenuList(response.data);
+              });
+          }
+                        }}
+                        >All Categories</th>
             </tr>
 
             {categoryList.map((value, key) => {
@@ -130,14 +124,22 @@ function Menu() {
                   <td
                     className="col-6 menu-item-hover"
                     onClick={() => {
-                      axios
-                        .get(`http://localhost:3001/menu/mandf/${value.id}`,
-                        { headers: { accessToken: localStorage.getItem("accessToken") } 
-                        })
+                      if (!localStorage.getItem("accessToken")) {
+                      axios.get(`http://localhost:3001/menu/byId/${value.id}`
+                        )
                         .then((response) => {
                           setMenuList(response.data);
                         });
-                    }}
+                      }
+                      else {
+                        axios.get(`http://localhost:3001/menu/mandf/${value.id}`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        }
+                        )
+                        .then((response) => {
+                          setMenuList(response.data);
+                        });
+                    }}}
                   >
                     <a>{value.name}</a>
                   
@@ -170,9 +172,7 @@ function Menu() {
                     <div className="col-6">
                       <p className="text-muted ">${value.price}</p>
                     </div>
-                    {/* <BookmarkAddIcon onClick={ ()=>{
-                          favpost(value.id);
-                        } }/> */}
+                   
                     <button  className="btn btn-sm  btn-outline-danger  col-3 "
                         onClick={ ()=>{
                           favpost(value.id);
@@ -193,12 +193,9 @@ function Menu() {
                     </button>
                   </div>
 
-                  <link
-                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                    rel="stylesheet"
-                  ></link>
+                 
                 </div>
-              </div>
+             </div>
             );
           })}
         </div>
