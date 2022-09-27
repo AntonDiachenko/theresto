@@ -11,41 +11,32 @@ const db = mysql.createPool({
   database: "aproject",
 });
 //get all menuitems by categoryid, 1 to many, add isfav and iscart
-router.get("/mandf", validateToken, async (req, res) => {
-  const userid = req.user.id;
-  const sqlSelect =
-    "SELECT m.id,m.itemname,m.description,m.price,m.photoURL, m.CategoryId,f.id IS NOT NULL isFav, c.id IS NOT NULL isCart from menuitems as m  LEFT JOIN favorites as f ON m.id = f.MenuItemId and f.UserId=" +
-    userid +
-    " LEFT JOIN cartitems as c on m.id = c.MenuItemId and c.UserId= " +
-    userid;
-  db.query(sqlSelect, (err, result) => {
-    res.json(result);
-  });
-});
+  router.get("/mandf", validateToken,   async (req, res) => {
+    const userid = req.user.id;
+    const sqlSelect = "SELECT m.id,m.itemname,m.description,m.price,m.photoURL, m.CategoryId,f.id IS NOT NULL isFav, c.id IS NOT NULL isCart from menuitems as m  LEFT JOIN favorites as f ON m.id = f.MenuItemId and f.UserId="+ userid+" LEFT JOIN cartitems as c on m.id = c.MenuItemId and c.UserId= " +userid;
+    db.query(sqlSelect, (err, result) => {
+      res.json(result);
+    });
+    });
 //get menuitems by categoryid, 1 to many, add isfav and iscart
-router.get("/mandf/:categoryid", validateToken, async (req, res) => {
-  const categoryid = req.params.categoryid;
-  const userid = req.user.id;
-  const sqlSelect =
-    "SELECT m.id,m.itemname,m.description,m.price,m.photoURL, m.CategoryId,f.id IS NOT NULL isFav, c.id IS NOT NULL isCart from menuitems as m  LEFT JOIN favorites as f ON m.id = f.MenuItemId and f.UserId= " +
-    userid +
-    " LEFT JOIN cartitems as c on m.id = c.MenuItemId and c.UserId= " +
-    userid +
-    " where CategoryId = " +
-    categoryid;
-  db.query(sqlSelect, (err, result) => {
-    res.json(result);
-  });
-});
+  router.get("/mandf/:categoryid", validateToken,   async (req, res) => {
+    const categoryid = req.params.categoryid;
+    const userid = req.user.id;
+    const sqlSelect = "SELECT m.id,m.itemname,m.description,m.price,m.photoURL, m.CategoryId,f.id IS NOT NULL isFav, c.id IS NOT NULL isCart from menuitems as m  LEFT JOIN favorites as f ON m.id = f.MenuItemId and f.UserId= "+ userid+" LEFT JOIN cartitems as c on m.id = c.MenuItemId and c.UserId= " +userid +" where CategoryId = "+categoryid;
+    db.query(sqlSelect, (err, result) => {
+      res.json(result);
+    });
+    });
+  
 
 //get all
-router.get("/", validateToken, async (req, res) => {
+router.get("/",  async (req, res) => {
   const menuList = await Menuitems.findAll();
   res.json(menuList);
 });
 
 //get menuitems by categoryid, 1 to many
-router.get("/byId/:categoryid", validateToken, async (req, res) => {
+router.get("/byId/:categoryid",   async (req, res) => {
   const categoryid = req.params.categoryid;
 
   const menuList = await Menuitems.findAll({
