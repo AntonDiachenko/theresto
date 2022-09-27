@@ -3,8 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function Menu() {
   const { id } = useParams();
@@ -13,13 +13,14 @@ function Menu() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    axios.get("http://localhost:3001/Categories",
-    { headers: { accessToken: localStorage.getItem("accessToken") } 
-    }).then((response) => {
-      setCategoryList(response.data);
-    });
+    axios
+      .get("http://localhost:3001/Categories", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setCategoryList(response.data);
+      });
 
     axios.get("http://localhost:3001/Menu/mandf",
     { headers: { accessToken: localStorage.getItem("accessToken") } 
@@ -29,25 +30,23 @@ function Menu() {
 
   }, []);
 
-
   const [userObject, setUserObject] = useState();
   const [buttonText, setButtonText] = useState();
-
 
   // const addorcancel= (id)=>{
 
   //   axios
   //   .get(`http://localhost:3001/fav/byId/${id}`,
-  //   { headers: { accessToken: localStorage.getItem("accessToken") } 
+  //   { headers: { accessToken: localStorage.getItem("accessToken") }
   //   })
   //   .then((response) => {
   //     setUserObject(response.data);
   //   });
-    
+
   //   if (userObject.MenuitemId==id){
-  //     setButtonText('cancel'); 
+  //     setButtonText('cancel');
   //   }else{
-  //     setButtonText('add to favorite'); 
+  //     setButtonText('add to favorite');
   //   }
 
   // }
@@ -156,23 +155,22 @@ function Menu() {
             return (
               <div className="col">
                 <div className="card h-100 ">
-                  <img src={value.photoURL} className="card-img-top" alt="..." />
+                  <img
+                    src={value.photoURL}
+                    className="card-img-top"
+                    alt="..."
+                  />
                   <div className="card-body ">
-                    <h5
-                      className="card-title"
-                     
-                    >
-                      {value.itemname}
-                    </h5>
+                    <h5 className="card-title">{value.itemname}</h5>
 
                     <p className="card-text">{value.description}</p>
                   </div>
-                  
+
                   <div className="row card-footer">
-                  <div className="col-6">
-                    <p className="text-muted ">${value.price}</p>
-                  </div>
-                      {/* <BookmarkAddIcon onClick={ ()=>{
+                    <div className="col-6">
+                      <p className="text-muted ">${value.price}</p>
+                    </div>
+                    {/* <BookmarkAddIcon onClick={ ()=>{
                           favpost(value.id);
                         } }/> */}
                     <button  className="btn btn-sm  btn-outline-danger  col-3 "
@@ -194,16 +192,16 @@ function Menu() {
                       {isCart(value.isCart)}
                     </button>
                   </div>
-                  
-           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+                  <link
+                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                    rel="stylesheet"
+                  ></link>
                 </div>
               </div>
             );
           })}
-         
         </div>
-
-       
       </div>
     </div>
   );

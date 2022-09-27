@@ -8,9 +8,9 @@ function Cart() {
   const [count, setCount] = useState(0);
   const [cartList, setCartList] = useState([]);
   const [jsonObject, setJsonObject] = useState(0);
-  var sum=0;
-  var tax=0;
-  var Total=0;
+  var sum = 0;
+  var tax = 0;
+  var Total = 0;
 
 
 const multiple=(a,b)=>{
@@ -22,23 +22,36 @@ const multiple=(a,b)=>{
   return itemTotal;
 }
   
-  
 
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
-      axios.get(`http://localhost:3001/cart/byuserId`,
-    { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
-      setCartList(response.data);
-      
-    });
-    };
-
-    
+      axios
+        .get(`http://localhost:3001/cart/byuserId`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          setCartList(response.data);
+        });
+    }
   }, []);
 
+  // const updatequantity = (id, quantity) => {
+  //   axios
+  //     .put(
+  //       `http://localhost:3001/cart/update`,
+  //       {
+  //         MenuitemId: id,
+  //         quantity: quantity + 1,
+  //       },
+  //       { headers: { accessToken: localStorage.getItem("accessToken") } }
+  //     )
+  //     .then((response) => {
+  //       navigate(0);
+  //     });
+  // };
 
   const increase =(id,quantity) => {
     quantity=quantity+1;
@@ -98,7 +111,7 @@ const multiple=(a,b)=>{
                         }} 
           >Clear All</button>
         </div>
-        
+
         <table class="table table-striped">
           <thead>
             <tr>
@@ -144,32 +157,31 @@ const multiple=(a,b)=>{
             
             // 3个问题，1 数量，2数量改变subtotal跟着改变，3确定提交order
               );
-            })}
+            })};
             <tr>
-            <td>{}</td>
-            <td>{}</td>
-            <td>Sum:</td>
-                <td>$ {sum}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>Sum:</td>
+              <td>$ {sum}</td>
             </tr>
             <tr>
-            <td>{}</td>
-            <td>{}</td>
-            <td>Tax:</td>
-                <td>$ {tax}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>Tax:</td>
+              <td>$ {tax}</td>
             </tr>
             <tr>
-            <td>{}</td>
-            <td>{}</td>
-            <td>Total:</td>
-                <td>$ {Total}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>Total:</td>
+              <td>$ {Total}</td>
             </tr>
 
           </thead>
         </table>
-        
       </div>
     </div>
   );
-};
+}
 
 export default Cart;
