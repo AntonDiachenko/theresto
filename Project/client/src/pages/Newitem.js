@@ -42,47 +42,45 @@ function Newitem() {
 
 
   return (
-    <div>
-<div className="container col-6">
-        <Formik 
+    <div className="login-container">
+      <div className="formContainer">
+        <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          <Form className="reg-form col-6">
-            <div >
-            <label className="col-4">Item Name:</label>
-            <ErrorMessage className="col-8" name="itemname" component="span" />
-            <Field  className="col-8"
-            name="itemname" 
-            /></div>
+          <Form>
+            <div className="form-outline mb-4">
+            <label className="form-label">Item Name:</label>
+            <ErrorMessage name="itemname" component="span" />
+            <Field className="form-control" name="itemname" />              
+            </div>
 
-            <div className="">
-            <label className="col-4">Description:</label>
-            <ErrorMessage className="col-8" name="description" component="span" />
-            <Field className="col-8"
-              name="description"
-            /></div>
-            <div className="">
-            <label className="col-4">Price:</label>
-            <ErrorMessage className="col-8" name="price" component="span" />
-            <Field className="col-8"
-              name="price"
-            /></div>
-            <div className="">
-            <label className="col-4">PhotoURL:</label>
-            <ErrorMessage className="col-8" name="photoURL" component="span" />
-            <Field className="col-8"
-              name="photoURL"
-            /></div>
-            <div className="">
-            <label className="col-4">CategoryId:</label>
-            <ErrorMessage className="col-8" name="CategoryId" component="span" />
-            <Field className="col-8"
-              name="CategoryId"
-            /></div>
+            <div className="form-outline mb-4">
+            <label className="form-label">Description:</label>
+            <ErrorMessage name="description" component="span" />
+            <Field className="form-control" name="description" />              
+            </div>
 
-            <button type="submit">addItem</button>
+            <div className="form-outline mb-4">
+            <label className="form-label">Price:</label>
+            <ErrorMessage name="price" component="span" />
+            <Field className="form-control" name="price" />
+            </div>
+
+            <div className="form-outline mb-4">
+            <label className="form-label">PhotoURL:</label>
+            <ErrorMessage name="photoURL" component="span" />
+            <Field className="form-control" name="photoURL" />              
+            </div>
+
+            <div className="form-outline mb-4">
+            <label className="form-label">CategoryId:</label>
+            <ErrorMessage name="CategoryId" component="span" />
+            <Field className="form-control" name="CategoryId" />              
+            </div>
+
+            <button type="submit" className="login-button">Add Item</button>
           </Form>
         </Formik>
       </div>

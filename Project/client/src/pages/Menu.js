@@ -21,15 +21,12 @@ function Menu() {
       setCategoryList(response.data);
     });
 
-    axios.get("http://localhost:3001/Menu",
+    axios.get("http://localhost:3001/Menu/mandf",
     { headers: { accessToken: localStorage.getItem("accessToken") } 
     }).then((response) => {
       setMenuList(response.data);
     });
 
-    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
-    //   setMenuList(response.data);
-    // });
   }, []);
 
 
@@ -55,6 +52,22 @@ function Menu() {
 
   // }
 
+  const isFavority=(isfav)=>{ 
+        if (isfav===1) {
+          return "cancel";
+        } else {
+          return "fav"
+        }
+  }
+
+  const isCart=(isCart)=>{
+    if (isCart===1) {
+      return "del";
+    } else {
+      return "add"
+    }
+}
+
   const favpost = (id) => {
     axios
       .post(
@@ -63,35 +76,35 @@ function Menu() {
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )}
 
-      const addToCart = (quantity, MenuitemId, price) => {
-        if (!localStorage.getItem("accessToken")) {
-          navigate("/login");
-        } else {
-          axios
-            .post(
-              "http://localhost:3001/cart",
-              {
-        
-                quantity: quantity,
-                MenuitemId: MenuitemId,
-                price: price,
-             
-              },
-              {
-                headers: {
-                  accessToken: localStorage.getItem("accessToken"),
-                },
-              }
-            )
-            .then((response) => {
-              if (response.data.error) {
-                console.log(response.data.error);
-              } else {
-                alert("Item Added To Cart");
-              }
-            });
-        }
-      };
+  const addToCart = (quantity, MenuitemId, price) => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+      axios
+        .post(
+          "http://localhost:3001/cart",
+          {
+    
+            quantity: quantity,
+            MenuitemId: MenuitemId,
+            price: price,
+          
+          },
+          {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            alert("Item Added To Cart");
+          }
+        });
+    }
+  };
 
 
 
@@ -102,8 +115,8 @@ function Menu() {
         <table className="table table-hover" name="categories">
           <thead>
           <tr>
-              <th className="flex-column col-1" onClick={() => {
-                        axios.get(`http://localhost:3001/menu`,
+              <th className="flex-column col-1 menu-item-hover" onClick={() => {
+                        axios.get(`http://localhost:3001/menu/mandf`,
                         { headers: { accessToken: localStorage.getItem("accessToken") } 
                         }).then((response) => {
                           setMenuList(response.data);
@@ -116,10 +129,10 @@ function Menu() {
               return (
                 <tr>
                   <td
-                    className="col-6"
+                    className="col-6 menu-item-hover"
                     onClick={() => {
                       axios
-                        .get(`http://localhost:3001/menu/byId/${value.id}`,
+                        .get(`http://localhost:3001/menu/mandf/${value.id}`,
                         { headers: { accessToken: localStorage.getItem("accessToken") } 
                         })
                         .then((response) => {
@@ -128,6 +141,7 @@ function Menu() {
                     }}
                   >
                     <a>{value.name}</a>
+                  
                   </td>
                 </tr>
               );
@@ -164,19 +178,20 @@ function Menu() {
                     <button  className="btn btn-sm  btn-outline-danger  col-3 "
                         onClick={ ()=>{
                           favpost(value.id);
-                     
+                          navigate(0);
+                          }
                         }
-                        
-                        }
-                        >fav
+                        >{isFavority(value.isFav)}
                     </button>
                     <button
-                      onClick={(e) =>
-                        addToCart( 1, value.id, value.price)
+                      onClick={()=>{
+                        addToCart( 1, value.id, value.price);
+                        navigate(0);
+                      } 
                       }
                       className="btn btn-success btn-sm col-3"
                     >
-                      Add to cart
+                      {isCart(value.isCart)}
                     </button>
                   </div>
                   

@@ -130,21 +130,7 @@ function App() {
                         </li>
                       </ul>
                     </div>
-                    <div className="welcome-container">
-                      <div>
-                        <h4>
-                          <span id="welcome">Welcome</span> {authState.username}
-                        </h4>
-                      </div>
-                      <div className="logout-btn-container">
-                        {authState.status && (
-                          <button className="login-button" onClick={logout}>
-                            {" "}
-                            Logout
-                          </button>
-                        )}
-                      </div>
-                    </div>
+                   
 
                     {/* <Link to="/profile"> Profile</Link> */}
                   </>

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-import React from "react";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { AuthContext } from "../helpers/AuthContext";
@@ -15,23 +12,7 @@ function Cart() {
   var tax=0;
   var Total=0;
 
-  
-  // getTotals(state, action) {
-  //   let { total, quantity } = state.cartItems.reduce(
-  //     (cartTotal, cartItem) => {
-  //       const { price, cartQuantity } = cartItem;
-  //       const itemTotal = price * cartQuantity;
 
-  //       cartTotal.total += itemTotal;
-  //       cartTotal.quantity += cartQuantity;
-
-  //       return cartTotal;
-  //     },
-  //     {
-  //       total: 0,
-  //       quantity: 0,
-  //     }
-  //   );
 const multiple=(a,b)=>{
   const itemTotal = a * b;
 
@@ -59,64 +40,63 @@ const multiple=(a,b)=>{
   }, []);
 
 
-  const updatequantity =(id,quantity) => {
-    
+  const increase =(id,quantity) => {
+    quantity=quantity+1;
     axios.put(`http://localhost:3001/cart/update`,{
       MenuitemId:id,
-      quantity:quantity+1
+      quantity:quantity
     },
     { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
      navigate(0);
    
     });
+  }
+
+  const reduce =(id,quantity) => {
+    quantity=quantity-1;
+    if (quantity>0) {
+      axios.put(`http://localhost:3001/cart/update`,{
+        MenuitemId:id,
+        quantity:quantity
+      },
+      { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
+       
+        navigate(0);
+      });
+    } else {
+      axios.delete(
+        `http://localhost:3001/cart/delete/${id}`,
+        
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      ).then((response)=>{
+        navigate(0);
+        });
+    }
     
   }
 
-  
-  const favpost = (id) => {
-    axios
-      .post(
-        "http://localhost:3001/fav",
-        { MenuitemId: id },
-        { headers: { accessToken: localStorage.getItem("accessToken") } }
-      )}
-
-  const addToCart = (quantity, MenuitemId, price) => {
-        if (!localStorage.getItem("accessToken")) {
-          navigate("/login");
-        } else {
-          axios
-            .post(
-              "http://localhost:3001/cart",
-              {
-        
-                quantity: quantity,
-                MenuitemId: MenuitemId,
-                price: price,
-             
-              },
-              {
-                headers: {
-                  accessToken: localStorage.getItem("accessToken"),
-                },
-              }
-            )
-            .then((response) => {
-              if (response.data.error) {
-                console.log(response.data.error);
-              } else {
-                alert("Item Added To Cart");
-              }
-            });
-        }
-      };
+  const clear =()=>{
+    axios.delete(
+      `http://localhost:3001/cart/delete`,
+      
+      { headers: { accessToken: localStorage.getItem("accessToken") } }
+    ).then((response)=>{
+      navigate(0);
+      });
+  }
 
 
   return (
     <div>
       <div class=" container col  mb-5">
-        <div className="row">
-          <h2 className="col">Cart List:</h2>
+        <div className="row d-flex row-clo-2">
+          <h2 className="col-8">Cart List:</h2>
+          <button 
+          className="col-2 crud-button"
+          onClick={()=>{
+                          clear();
+                        }} 
+          >Clear All</button>
         </div>
         
         <table class="table table-striped">
@@ -134,7 +114,7 @@ const multiple=(a,b)=>{
               <td className="col-4">
                   <div className="d-flex row row-cols-2 h-50 col-12">
                         <div className=" col-5 h-50 ">
-                            <img className=" col-12" src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D" />
+                            <img className=" col-12" src={value.photoURL}/>
                         </div>
                         <div className=" col-7">
                             <div className=" " > Itemname :</div>
@@ -148,14 +128,12 @@ const multiple=(a,b)=>{
               <td className="col-2">
                 <div className="row">
                         <button onClick={()=>{
-                          setCount(count+1);
+                          increase(value.MenuitemId,value.quantity);
                         }} className="col-1">+</button>
                         <div  className="col-2">{value.quantity}</div>
                         <button onClick={()=>{
-                          setCount(count-1);
-                          if (count=0) {
-                            favpost = (value.MenuitemId) 
-                          }
+                          reduce(value.MenuitemId,value.quantity);
+                        
                         }}  className="col-1 mx-1">-</button>
                 </div>
               </td>
@@ -186,7 +164,6 @@ const multiple=(a,b)=>{
                 <td>$ {Total}</td>
             </tr>
 
-            {/* <tr> total :{total +=plus(value.quantity,value.price)}</tr> */}
           </thead>
         </table>
         

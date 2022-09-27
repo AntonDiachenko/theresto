@@ -2,12 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Favorites() {
   const navigate = useNavigate();
   const [menuList, setMenuList] = useState([]);
-  const [count, setCount] = useState(0);
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
@@ -22,6 +21,16 @@ function Favorites() {
     
   }, []);
 
+
+  const isCart=(isCart)=>{
+    if (isCart===1) {
+      return "del";
+    } else {
+      return "add"
+    }
+}
+
+
   const favpost = (id) => {
     axios
       .post(
@@ -29,7 +38,7 @@ function Favorites() {
         { MenuitemId: id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )}
-  const addToCart = (quantity, itemname, price) => {
+  const addToCart = (quantity, MenuitemId, price) => {
         if (!localStorage.getItem("accessToken")) {
           navigate("/login");
         } else {
@@ -39,9 +48,9 @@ function Favorites() {
               {
         
                 quantity: quantity,
-                itemname: itemname,
+                MenuitemId: MenuitemId,
                 price: price,
-             
+              
               },
               {
                 headers: {
@@ -59,6 +68,7 @@ function Favorites() {
         }
       };
 
+
   return (
     <div className="col-10 mx-5 ">
         <div className="row  g-2  row-cols-md-4 ">
@@ -66,8 +76,7 @@ function Favorites() {
             return (
               <div className="col ">
                 <div className="card h-100">
-                  <img src="https://projectgofishing.blob.core.windows.net/gofishing/download.jpg?sv=2021-04-10&ss=bf&srt=co&se=2022-09-27T00%3A58%3A44Z&sp=rwl&sig=s32CK%2FSg5g3Lp25i%2F8B00SRuLu9xxtyf1YjEuI8u4ew%3D
-" className="card-img-top" alt="..." />
+                  <img src={value.photoURL} className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h5
                       className="card-title"
@@ -85,18 +94,18 @@ function Favorites() {
                                 onClick={ ()=>{
                                   favpost(value.MenuitemId);
                                   navigate(0);
-                                  // addorcancel(value.id);
                                 }
-                                // {buttonText}
                               }
                                 >cancel</button>
                           <button
-                            onClick={(e) =>
-                              addToCart( 1, value.itemname, value.price)
+                             onClick={()=>{
+                              addToCart( 1, value.MenuitemId, value.price);
+                              navigate(0);
+                            } 
                             }
                             className="btn btn-success btn-sm col-3"
                           >
-                            Add to cart
+                             {isCart(value.isCart)} 
                           </button>
                       </div>
                     </div>
