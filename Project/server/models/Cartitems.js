@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, Datatypes) => {
   const Cartitems = sequelize.define("Cartitems", {
     quantity: {
@@ -11,27 +10,6 @@ module.exports = (sequelize, Datatypes) => {
       allowNull: false,
     },
   });
-
-  // NEEDS USERID && MENUITEMID FK
-
-  // Test found online
-  /*
-  (async function test(){
-    try {
-      await sequelize.sync({ force: true });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      await sequelize.close();
-    }
-  }) ();
-  */
-
-  // Users.associate =(models)=>{
-  //     Users.hasMany(models.Comments,{
-  //         onDelete:"cascade",
-  //     })
-  // }
 
   return Cartitems;
 };

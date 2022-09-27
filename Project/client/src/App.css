@@ -338,7 +338,7 @@ height: 120px;
   border-radius: 10px;
   border-color: transparent;
   background: transparent;
-  font-family: 'Julee';
+  font-family: "Julee";
 }
 
 .order-now:hover {
@@ -417,7 +417,7 @@ height: 120px;
   width: 300px;
 }
 
-.login-button{
+.login-button {
   background-color: rgb(232, 240, 119);
   color: black;
   border-radius: 7px;
@@ -426,12 +426,12 @@ height: 120px;
   border-color: lightgray;
 }
 
-.login-button:hover{
+.login-button:hover {
   background-color: rgb(232, 232, 233);
   color: black;
 }
 
-.welcome-container{
+.welcome-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -459,11 +459,10 @@ height: 120px;
 .crud-button {
   width: 100px;
   color: brown;
-  background-color: rgb(232, 232, 233);;
+  background-color: rgb(232, 232, 233);
   border-color: brown;
   border-radius: 5px;
   margin: 0px 5px 0px 5px;
-
 }
 
 .crud-button:hover {
@@ -471,7 +470,7 @@ height: 120px;
   background-color: brown;
 }
 
-.add-user-container{
+.add-user-container {
   display: flex;
 }
 
@@ -548,7 +547,6 @@ height: 120px;
   width: 75px;
   height: auto;
 }
-
 
 
 

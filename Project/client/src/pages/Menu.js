@@ -23,16 +23,12 @@ function Menu() {
       });
 
     axios
-      .get("http://localhost:3001/Menu", {
+      .get("http://localhost:3001/Menu/mandf", {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
         setMenuList(response.data);
       });
-
-    // axios.get("http://localhost:3001/Categories/menujoin").then((response) => {
-    //   setMenuList(response.data);
-    // });
   }, []);
 
   const [userObject, setUserObject] = useState();
@@ -55,6 +51,24 @@ function Menu() {
   //   }
 
   // }
+
+  const isFavority = (isfav) => {
+    if (isfav === 1) {
+      return "cancel";
+    } else {
+      return "fav";
+    }
+  };
+
+  const isCart = (isCart) => {
+    if (isCart === 1) {
+      return "del";
+    } else {
+      return "add";
+    }
+  };
+
+ 
 
   const favpost = (id) => {
     axios.post(
@@ -123,10 +137,8 @@ function Menu() {
                     className="menu-item-hover"
                     onClick={() => {
                       axios
-                        .get(`http://localhost:3001/menu/byId/${value.id}`, {
-                          headers: {
-                            accessToken: localStorage.getItem("accessToken"),
-                          },
+                        .get(`http://localhost:3001/menu/mandf/${value.id}`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
                         })
                         .then((response) => {
                           setMenuList(response.data);
@@ -134,6 +146,7 @@ function Menu() {
                     }}
                   >
                     <a>{value.name}</a>
+                  
                   </td>
                 </tr>
               );
@@ -168,15 +181,19 @@ function Menu() {
                       className="btn btn-sm  btn-outline-danger  col-3 "
                       onClick={() => {
                         favpost(value.id);
+                        navigate(0);
                       }}
                     >
-                      fav
+                      {isFavority(value.isFav)}
                     </button>
                     <button
-                      onClick={(e) => addToCart(1, value.id, value.price)}
+                      onClick={() => {
+                        addToCart(1, value.id, value.price);
+                        navigate(0);
+                      }}
                       className="btn btn-success btn-sm col-3"
                     >
-                      Add to cart
+                      {isCart(value.isCart)}
                     </button>
                   </div>
 

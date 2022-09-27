@@ -35,20 +35,16 @@ module.exports = (sequelize, Datatypes) => {
     //   type:Datatypes.BOOLEAN,
     //   defaultValue:false,
     // }
-})
+  });
 
-
-Menuitems.associate =(models)=>{
-      Menuitems.hasMany(models.Favorites,{
-          onDelete:"cascade",
-      });
-      Menuitems.hasMany(models.Cartitems,{
-        onDelete:"cascade",
-    })
-  }
-
-  
-
+  Menuitems.associate = (models) => {
+    Menuitems.hasMany(models.Favorites, {
+      onDelete: "cascade",
+    });
+    Menuitems.hasMany(models.Cartitems, {
+      onDelete: "cascade",
+    });
+  };
 
   Menuitems.associate =(models)=>{
       Menuitems.hasMany(models.Orderitems,{

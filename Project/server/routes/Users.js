@@ -88,8 +88,7 @@ router.get("/byname/:username", validateToken, async (req, res) => {
   const user = await Users.findOne({ where: { username: username } });
   if (!user) {
     res.status(404).json("The user is not found");
-  } 
-  else {
+  } else {
     res.status(200).json(user);
   }
 });
@@ -121,7 +120,6 @@ router.put("/update/:id([0-9]+)", async (req, res) => {
   );
   res.json(req.body);
 });
-
 
 // auth route to check if there is a valid token or not
 router.get("/auth", validateToken, (req, res) => {
