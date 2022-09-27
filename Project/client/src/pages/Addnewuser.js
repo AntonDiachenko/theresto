@@ -44,18 +44,13 @@ function Addnewuser() {
             <div className="form-outline mb-4">
               <label className="form-label">User Name:</label>
               <ErrorMessage name="username" component="span" />
-              <Field
-                className="form-control"
-                id="inputCreateUser"
-                name="username"
-                placeholder="John"
-              />
+              <Field className="form-control" id="inputCreateUser" name="username" placeholder="John" />
             </div>
             <div className="form-outline mb-4">
               <label className="form-label">Email:</label>
               <ErrorMessage name="email" component="span" />
               <Field
-                className="form-control"
+              className="form-control"
                 id="inputCreateUser"
                 name="email"
                 placeholder="Your email"
@@ -65,7 +60,7 @@ function Addnewuser() {
               <label className="form-label">Password:</label>
               <ErrorMessage name="password" component="span" />
               <Field
-                className="form-control"
+              className="form-control"
                 id="inputCreateUser"
                 type="password"
                 name="password"
@@ -76,7 +71,7 @@ function Addnewuser() {
               <label className="form-label">Confirm Password:</label>
               <ErrorMessage name="confirmpassword" component="span" />
               <Field
-                className="form-control"
+              className="form-control"
                 id="inputCreateUser"
                 type="password"
                 name="confirmpassword"
@@ -87,7 +82,7 @@ function Addnewuser() {
               <label className="form-label">Phone:</label>
               <ErrorMessage name="phone" component="span" />
               <Field
-                className="form-control"
+              className="form-control"
                 id="inputCreateUser"
                 name="phone"
                 placeholder="Your phone"
@@ -96,12 +91,7 @@ function Addnewuser() {
             <div className="form-outline mb-4">
               <label className="form-label">Role:</label>
               <ErrorMessage name="role" component="span" />
-              <Field
-                className="form-control"
-                id="inputCreateUser"
-                name="role"
-                placeholder="Your role"
-              />
+              <Field className="form-control" id="inputCreateUser" name="role" placeholder="Your role" />
             </div>
 
             <button type="submit" className="login-button">

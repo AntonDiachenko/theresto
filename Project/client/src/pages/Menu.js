@@ -68,6 +68,8 @@ function Menu() {
     }
   };
 
+ 
+
   const favpost = (id) => {
     axios.post(
       "http://localhost:3001/fav",
@@ -109,36 +111,26 @@ function Menu() {
       <div className="col-3 mx-2">
         <table className="table table-hover" name="categories">
           <thead>
-            <tr>
-              <th
-                className="flex-column col-1"
-                onClick={() => {
-                  axios
-                    .get(`http://localhost:3001/menu/mandf`, {
-                      headers: {
-                        accessToken: localStorage.getItem("accessToken"),
-                      },
-                    })
-                    .then((response) => {
-                      setMenuList(response.data);
-                    });
-                }}
-              >
-                All Categories
-              </th>
+          <tr>
+              <th className="flex-column col-1 menu-item-hover" onClick={() => {
+                        axios.get(`http://localhost:3001/menu/mandf`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
+                        }).then((response) => {
+                          setMenuList(response.data);
+                        });
+                  
+                        }}>All Categories</th>
             </tr>
 
             {categoryList.map((value, key) => {
               return (
                 <tr>
                   <td
-                    className="col-6"
+                    className="col-6 menu-item-hover"
                     onClick={() => {
                       axios
-                        .get(`http://localhost:3001/menu/mandf/${value.id}`, {
-                          headers: {
-                            accessToken: localStorage.getItem("accessToken"),
-                          },
+                        .get(`http://localhost:3001/menu/mandf/${value.id}`,
+                        { headers: { accessToken: localStorage.getItem("accessToken") } 
                         })
                         .then((response) => {
                           setMenuList(response.data);
@@ -146,6 +138,7 @@ function Menu() {
                     }}
                   >
                     <a>{value.name}</a>
+                  
                   </td>
                 </tr>
               );

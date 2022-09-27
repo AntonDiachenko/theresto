@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Profile() {
+ 
+
   const [userObject, setUserObject] = useState("");
   const [listOfFav, setListOfFav] = useState([]);
   // const { authState } = useContext(AuthContext);

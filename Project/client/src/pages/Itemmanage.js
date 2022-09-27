@@ -88,96 +88,101 @@ function Itemmanage() {
   };
 
   return (
-    <div class="d-flex  container col-12 mb-5">
-      <div class="col-3 mx-5">
-        <table class="table table-hover" name="categories">
-          <thead>
-            <tr>
-              <th
-                className="flex-column col-1"
-                onClick={() => {
-                  axios
-                    .get(`http://localhost:3001/menu`, {
-                      headers: {
-                        accessToken: localStorage.getItem("accessToken"),
-                      },
-                    })
-                    .then((response) => {
-                      setListOfMenuitems(response.data);
-                    });
-                }}
-              >
-                All Categories
-              </th>
-            </tr>
+    <div class="d-flex my-5 mx-5">
+      <div class="px-5">
+        <div>
+          <table class="table table-hover" name="categories">
+            <thead>
+              <tr>
+                <th
+                  className="flex-column col-1 item-manage-hover"
+                  onClick={() => {
+                    axios
+                      .get(`http://localhost:3001/menu`, {
+                        headers: {
+                          accessToken: localStorage.getItem("accessToken"),
+                        },
+                      })
+                      .then((response) => {
+                        setListOfMenuitems(response.data);
+                      });
+                  }}
+                >
+                  All Categories
+                </th>
+              </tr>
+            </thead>
 
             {listOfCategories.map((value, key) => {
               return (
-                <tr>
-                  <td
-                    className="col-6"
-                    onClick={() => {
-                      axios
-                        .get(`http://localhost:3001/menu/byId/${value.id}`, {
-                          headers: {
-                            accessToken: localStorage.getItem("accessToken"),
-                          },
-                        })
-                        .then((response) => {
-                          setListOfMenuitems(response.data);
-                        });
-                    }}
-                  >
-                    {value.name}
-                  </td>
-                  <button
-                    className="btn btn-sm  btn-outline-danger col-6"
-                    onClick={() => {
-                      deleteCategory(value.id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className="btn btn-sm  btn-outline-danger col-6"
-                    onClick={() => {
-                      updateCategory(value.id);
-                    }}
-                  >
-                    update
-                  </button>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td
+                      className="item-manage-hover"
+                      onClick={() => {
+                        axios
+                          .get(`http://localhost:3001/menu/byId/${value.id}`, {
+                            headers: {
+                              accessToken: localStorage.getItem("accessToken"),
+                            },
+                          })
+                          .then((response) => {
+                            setListOfMenuitems(response.data);
+                          });
+                      }}
+                    >
+                      {value.name}
+                    </td>
+                    <td>
+                      <button
+                        className="crud-button"
+                        onClick={() => {
+                          deleteCategory(value.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="crud-button"
+                        onClick={() => {
+                          updateCategory(value.id);
+                        }}
+                      >
+                        Update
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
               );
             })}
+          </table>
+        </div>
 
-            <tr>
-              <div className="row  ">
-                <input
-                  className="col-6"
-                  type="text"
-                  name="name"
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  placeholder="New Category+"
-                ></input>
-
-                <button
-                  type="submit"
-                  className="btn btn-sm btn-secondary col-6"
-                  onClick={NewCategory}
-                >
-                  New
-                </button>
-              </div>
-            </tr>
-          </thead>
-        </table>
+        <div className="new-cat-container">
+          <div className="row  ">
+            <input
+              type="text"
+              name="name"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              placeholder="New Category+"
+            ></input>
+          </div>
+          <div>
+            <button type="submit" className="crud-button" onClick={NewCategory}>
+              Create New
+            </button>
+          </div>
+        </div>
+        <p>
+          <i>* Enter category name here to update or create new</i>
+        </p>
       </div>
 
-      <div class="col-9 mx-5">
+      <div class="flex-grow-1 px-5">
         <div className="row pre-scrollable">
-          <h2
+          <h3
             className="col"
             onClick={() => {
               axios
@@ -190,9 +195,9 @@ function Itemmanage() {
             }}
           >
             Item List:
-          </h2>
+          </h3>
           <button
-            className="btn btn-sm  btn-outline-danger  col-2"
+            className="crud-button col-2"
             onClick={() => {
               navigate("/newitem");
             }}
@@ -201,30 +206,37 @@ function Itemmanage() {
           </button>
         </div>
 
-        <table class="table table-hover col-9" name="menuitems">
+        <table class="table table-hover" name="menuitems">
           <thead>
             <tr>
-              <th className="col-1 flex-column">itemname</th>
-              <th className="col-1 flex-column">description</th>
-              <th className="col-1 flex-column">price</th>
-              <th className="col-2 flex-column">photoURL</th>
+              <th className="col-1 flex-column">Item Name</th>
+              <th className="col-3 flex-column">Description</th>
+              <th className="col-1 flex-column">Price</th>
+              <th className="col-3 flex-column">Photo URL</th>
+              <th className="col-1 flex-column">Photo</th>
             </tr>
+          </thead>
 
-            {listOfMenuitems.map((value, key) => {
-              return (
+          {listOfMenuitems.map((value, key) => {
+            return (
+              <tbody>
                 <tr
+                  className="item-manage-hover"
                   onClick={() => {
                     navigate(`/menu/${value.id}`);
                   }}
                 >
                   <td className="col-1">{value.itemname}</td>
-                  <td className="col-1">{value.description}</td>
+                  <td className="col-3">{value.description}</td>
                   <td className="col-1">{value.price}</td>
-                  <td className="col-2">{value.photoURL}</td>
+                  <td className="col-3">{value.photoURL}</td>
+                  <td className="col-1">
+                    <img className="itemListImage" src={value.photoURL}></img>
+                  </td>
                 </tr>
-              );
-            })}
-          </thead>
+              </tbody>
+            );
+          })}
         </table>
       </div>
     </div>

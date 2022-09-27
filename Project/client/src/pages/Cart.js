@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Stripe.css";
@@ -137,51 +136,42 @@ function Cart() {
             </tr>
 
             {cartList.map((value, key) => {
-              return (
-                <tr>
-                  <td className="col-4">
-                    <div className="d-flex row row-cols-2 h-50 col-12">
-                      <div className=" col-5 h-50 ">
-                        <img className=" col-12" src={value.photoURL} />
-                      </div>
-                      <div className=" col-7">
-                        <div className=" "> Itemname :</div>
-                        <div className=" mb-3"> {value.itemname} </div>
-                        <div className=" "> Item Description :</div>
-                        <div className="mb-3 "> {value.description} </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="col-2">
-                    <div className="row">
-                      <button
-                        onClick={() => {
-                          increase(value.MenuitemId, value.quantity);
-                        }}
-                        className="col-1"
-                      >
-                        +
-                      </button>
-                      <div className="col-2">{value.quantity}</div>
-                      <button
-                        onClick={() => {
-                          reduce(value.MenuitemId, value.quantity);
-                        }}
-                        className="col-1 mx-1"
-                      >
-                        -
-                      </button>
-                    </div>
-                  </td>
-                  <td className="col-2">$ {value.price}</td>
-                  <td className="col-3">
-                    $ {multiple(value.quantity, value.price)}
-                  </td>
-                </tr>
-
-                // 3个问题，1 数量，2数量改变subtotal跟着改变，3确定提交order
+              return ( 
+            <tr>
+              <td className="col-4">
+                  <div className="d-flex row row-cols-2 h-50 col-12">
+                        <div className=" col-5 h-50 ">
+                            <img className=" col-12" src={value.photoURL}/>
+                        </div>
+                        <div className=" col-7">
+                            <div className=" " > Itemname :</div>
+                            <div className=" mb-3" > {value.itemname} </div> 
+                            <div className=" " >  Item Description :</div>
+                            <div className="mb-3 " > {value.description} </div> 
+                        </div>
+                               
+                  </div>
+              </td>
+              <td className="col-2">
+                <div className="row">
+                        <button onClick={()=>{
+                          increase(value.MenuitemId,value.quantity);
+                        }} className="col-1">+</button>
+                        <div  className="col-2">{value.quantity}</div>
+                        <button onClick={()=>{
+                          reduce(value.MenuitemId,value.quantity);
+                        
+                        }}  className="col-1 mx-1">-</button>
+                </div>
+              </td>
+              <td className="col-2">$ {value.price}</td>
+              <td className="col-3" >$ {multiple(value.quantity, value.price)}</td>
+              
+            </tr>
+            
+            // 3个问题，1 数量，2数量改变subtotal跟着改变，3确定提交order
               );
-            })}
+            })};
             <tr>
               <td>{}</td>
               <td>{}</td>

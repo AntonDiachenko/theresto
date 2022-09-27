@@ -4,94 +4,89 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+  
 function Newitem() {
-  let navigate = useNavigate();
 
-  const initialValues = {
-    itemname: "",
-    description: "",
-    price: "",
-    photoURL: "",
-    CategoryId: "",
-  };
 
-  const onSubmit = (data) => {
-    axios
-      .post(`http://localhost:3001/menu`, data, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
-      .then((response) => {
-        navigate("/Itemmanage");
-      });
-  };
 
-  const validationSchema = Yup.object().shape({
-    itemname: Yup.string().required(),
-    description: Yup.string().required(),
-    price: Yup.number().required(),
-    photoURL: Yup.string().max(10000),
-    CategoryId: Yup.number().required(),
-  });
+    let navigate = useNavigate();
+
+
+    const initialValues = {
+        itemname:"",
+        description:"",
+        price:"",
+        photoURL:"",
+        CategoryId:"",
+    };
+
+    const onSubmit = (data) => {
+        axios
+          .post(`http://localhost:3001/menu`, data, {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          })
+          .then((response) => {
+            navigate("/Itemmanage");
+          });
+      };
+
+      const validationSchema= Yup.object().shape({
+        itemname:Yup.string().required(), 
+        description:Yup.string().required(), 
+        price:Yup.number().required(), 
+        photoURL:Yup.string().max(10000),
+        CategoryId:Yup.number().required()
+    }); 
+    
+
+
 
   return (
-    <div>
-      <div className="container col-6">
+    <div className="login-container">
+      <div className="formContainer">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          <Form className="reg-form col-6">
-            <div>
-              <label className="col-4">Item Name:</label>
-              <ErrorMessage
-                className="col-8"
-                name="itemname"
-                component="span"
-              />
-              <Field className="col-8" name="itemname" />
+          <Form>
+            <div className="form-outline mb-4">
+            <label className="form-label">Item Name:</label>
+            <ErrorMessage name="itemname" component="span" />
+            <Field className="form-control" name="itemname" />              
             </div>
 
-            <div className="">
-              <label className="col-4">Description:</label>
-              <ErrorMessage
-                className="col-8"
-                name="description"
-                component="span"
-              />
-              <Field className="col-8" name="description" />
-            </div>
-            <div className="">
-              <label className="col-4">Price:</label>
-              <ErrorMessage className="col-8" name="price" component="span" />
-              <Field className="col-8" name="price" />
-            </div>
-            <div className="">
-              <label className="col-4">PhotoURL:</label>
-              <ErrorMessage
-                className="col-8"
-                name="photoURL"
-                component="span"
-              />
-              <Field className="col-8" name="photoURL" />
-            </div>
-            <div className="">
-              <label className="col-4">CategoryId:</label>
-              <ErrorMessage
-                className="col-8"
-                name="CategoryId"
-                component="span"
-              />
-              <Field className="col-8" name="CategoryId" />
+            <div className="form-outline mb-4">
+            <label className="form-label">Description:</label>
+            <ErrorMessage name="description" component="span" />
+            <Field className="form-control" name="description" />              
             </div>
 
-            <button type="submit">addItem</button>
+            <div className="form-outline mb-4">
+            <label className="form-label">Price:</label>
+            <ErrorMessage name="price" component="span" />
+            <Field className="form-control" name="price" />
+            </div>
+
+            <div className="form-outline mb-4">
+            <label className="form-label">PhotoURL:</label>
+            <ErrorMessage name="photoURL" component="span" />
+            <Field className="form-control" name="photoURL" />              
+            </div>
+
+            <div className="form-outline mb-4">
+            <label className="form-label">CategoryId:</label>
+            <ErrorMessage name="CategoryId" component="span" />
+            <Field className="form-control" name="CategoryId" />              
+            </div>
+
+            <button type="submit" className="login-button">Add Item</button>
           </Form>
         </Formik>
       </div>
+
     </div>
-  );
+  )
 }
 
-export default Newitem;
+export default Newitem

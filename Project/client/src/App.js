@@ -130,6 +130,7 @@ function App() {
                         </li>
                       </ul>
                     </div>
+                   
 
                     {/* <Link to="/profile"> Profile</Link> */}
                   </>
