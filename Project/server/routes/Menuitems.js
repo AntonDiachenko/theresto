@@ -7,7 +7,7 @@ const mysql = require("mysql2");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "root2022root2022",
+  password: "root2022",
   database: "aproject",
 });
 //get all menuitems by categoryid, 1 to many, add isfav and iscart
